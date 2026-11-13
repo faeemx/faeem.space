@@ -2,34 +2,21 @@
 // SearchModal.astro
 ---
 
-<!-- Trigger Button -->
-<button
-  type="button"
-  id="search-open-btn"
-  class="flex items-center gap-2 px-2.5 py-1.5 text-xs font-mono text-[#756c63] dark:text-[#968d81] hover:text-[#231f1c] dark:hover:text-[#f3ede4] hover:bg-[#f0e8dc]/60 dark:hover:bg-[#26221d]/60 rounded-md border border-[#e8e0d2] dark:border-[#2f2a24] transition-colors"
-  aria-label="Search writings"
->
-  <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-  </svg>
-  <span class="hidden sm:inline">Search</span>
-  <kbd class="hidden sm:inline-block px-1.5 py-0.5 text-[10px] bg-[#f0e8dc] dark:bg-[#28241f] rounded text-[#554d45] dark:text-[#c4bcaf] font-mono">
-    ⌘K
-  </kbd>
-</button>
-
 <!-- Modal Backdrop & Dialog -->
 <div
   id="search-dialog"
-  class="fixed inset-0 z-50 hidden bg-[#231f1c]/40 backdrop-blur-xs p-4 sm:p-6 md:p-20 overflow-y-auto"
+  class="fixed inset-0 z-50 hidden bg-[#231f1c]/50 backdrop-blur-xs flex items-start justify-center p-3 sm:p-6 pt-12 sm:pt-20 overflow-y-auto"
   role="dialog"
   aria-modal="true"
-  aria-labelledby="search-modal-title"
+  aria-label="Search essays"
 >
-  <div class="max-w-xl mx-auto bg-[#fbf8f3] dark:bg-[#1c1917] border border-[#e8e0d2] dark:border-[#2f2a24] rounded-2xl shadow-xl overflow-hidden transition-all">
+  <div
+    id="search-dialog-card"
+    class="w-full max-w-xl bg-[#fbf8f3] dark:bg-[#1c1917] border border-[#e8e0d2] dark:border-[#2f2a24] rounded-2xl shadow-2xl overflow-hidden transition-all flex flex-col max-h-[85vh]"
+  >
     <!-- Search Input Header -->
-    <div class="flex items-center px-4 py-3 border-b border-[#e8e0d2] dark:border-[#2f2a24] gap-3">
-      <svg class="w-5 h-5 text-[#8c8275] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <div class="flex items-center px-4 py-3 border-b border-[#e8e0d2] dark:border-[#2f2a24] gap-3 bg-[#fbf8f3] dark:bg-[#1c1917] shrink-0">
+      <svg class="w-4 h-4 text-[#8c8275] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
       </svg>
       <input
@@ -43,26 +30,26 @@
       <button
         type="button"
         id="search-close-btn"
-        class="text-xs font-mono px-2 py-1 text-[#8c8275] hover:text-[#231f1c] dark:hover:text-[#f3ede4] rounded"
+        class="text-xs font-mono px-2 py-1 text-[#8c8275] hover:text-[#231f1c] dark:hover:text-[#f3ede4] hover:bg-[#ede5d8] dark:hover:bg-[#27231e] rounded transition-colors cursor-pointer"
         aria-label="Close search"
       >
-        <kbd class="text-[11px]">ESC</kbd>
+        <kbd class="text-[11px] font-mono">ESC</kbd>
       </button>
     </div>
 
     <!-- Search Results List -->
-    <div id="search-results-container" class="max-h-[380px] overflow-y-auto p-2 space-y-1">
+    <div id="search-results-container" class="overflow-y-auto p-2 space-y-1 flex-1">
       <div id="search-empty-state" class="py-12 text-center text-xs font-mono text-[#8c8275]">
         Type to search essays...
       </div>
     </div>
 
     <!-- Modal Footer -->
-    <div class="px-4 py-2.5 bg-[#f5efe4] dark:bg-[#221e1a] border-t border-[#e8e0d2] dark:border-[#2f2a24] flex items-center justify-between text-[11px] font-mono text-[#756c63] dark:text-[#968d81]">
+    <div class="px-4 py-2.5 bg-[#f5efe4] dark:bg-[#221e1a] border-t border-[#e8e0d2] dark:border-[#2f2a24] flex items-center justify-between text-[11px] font-mono text-[#756c63] dark:text-[#968d81] shrink-0">
       <div class="flex items-center gap-3">
-        <span><kbd>↑</kbd> <kbd>↓</kbd> Navigate</span>
-        <span><kbd>↵</kbd> Select</span>
-        <span><kbd>ESC</kbd> Close</span>
+        <span><kbd class="px-1 py-0.5 bg-[#ebe3d5] dark:bg-[#2d2822] rounded">↑</kbd> <kbd class="px-1 py-0.5 bg-[#ebe3d5] dark:bg-[#2d2822] rounded">↓</kbd> navigate</span>
+        <span><kbd class="px-1.5 py-0.5 bg-[#ebe3d5] dark:bg-[#2d2822] rounded">↵</kbd> select</span>
+        <span><kbd class="px-1 py-0.5 bg-[#ebe3d5] dark:bg-[#2d2822] rounded">esc</kbd> close</span>
       </div>
       <span id="search-count-label"></span>
     </div>
@@ -70,23 +57,31 @@
 </div>
 
 <script is:inline>
-  function setupSearch() {
-    const openBtn = document.getElementById('search-open-btn');
-    const closeBtn = document.getElementById('search-close-btn');
-    const dialog = document.getElementById('search-dialog');
-    const input = document.getElementById('search-input');
-    const resultsContainer = document.getElementById('search-results-container');
-    const countLabel = document.getElementById('search-count-label');
-
-    if (!openBtn || !dialog || !input || !resultsContainer) return;
-
+  (function () {
     let searchIndex = null;
     let selectedIndex = -1;
 
+    function getDialog() {
+      return document.getElementById('search-dialog');
+    }
+
+    function getInput() {
+      return document.getElementById('search-input');
+    }
+
+    function getContainer() {
+      return document.getElementById('search-results-container');
+    }
+
+    function getCountLabel() {
+      return document.getElementById('search-count-label');
+    }
+
     async function loadIndex() {
-      if (searchIndex) return searchIndex;
+      if (searchIndex && searchIndex.length) return searchIndex;
       try {
         const res = await fetch('/search.json');
+        if (!res.ok) throw new Error('Network response not ok');
         searchIndex = await res.json();
       } catch (e) {
         console.error('Failed to load search index:', e);
@@ -96,58 +91,88 @@
     }
 
     function openModal() {
+      const dialog = getDialog();
+      const input = getInput();
+      if (!dialog || !input) return;
+
       dialog.classList.remove('hidden');
       document.body.style.overflow = 'hidden';
+
       loadIndex().then(() => {
-        input.focus();
-        if (!input.value.trim()) renderSuggestions();
+        if (!input.value.trim()) {
+          renderSuggestions();
+        }
+        setTimeout(() => input.focus(), 30);
       });
     }
 
     function closeModal() {
+      const dialog = getDialog();
+      const input = getInput();
+      if (!dialog) return;
+
       dialog.classList.add('hidden');
       document.body.style.overflow = '';
-      input.value = '';
+      if (input) input.value = '';
       selectedIndex = -1;
     }
 
     function renderSuggestions() {
-      if (!searchIndex || !searchIndex.length) return;
-      resultsContainer.innerHTML = '';
+      const container = getContainer();
+      const countLabel = getCountLabel();
+      if (!container || !searchIndex || !searchIndex.length) return;
+
+      container.innerHTML = '';
       
       const label = document.createElement('div');
       label.className = 'px-3 py-2 text-[11px] font-mono text-[#756c63] dark:text-[#968d81] uppercase tracking-wider';
       label.textContent = 'Recent Writing';
-      resultsContainer.appendChild(label);
+      container.appendChild(label);
 
       searchIndex.slice(0, 4).forEach((item, idx) => {
         const el = createResultElement(item, idx);
-        resultsContainer.appendChild(el);
+        container.appendChild(el);
       });
+
       if (countLabel) countLabel.textContent = `${searchIndex.length} essays`;
     }
 
     function createResultElement(item, index) {
       const a = document.createElement('a');
       a.href = item.url;
-      a.className = 'search-result-item block px-3 py-2.5 rounded-lg text-left transition-colors hover:bg-[#ede5d8] dark:hover:bg-[#27231e]';
-      a.setAttribute('data-index', index);
+      a.className = 'search-result-item block px-3 py-2.5 rounded-lg text-left transition-colors hover:bg-[#ede5d8] dark:hover:bg-[#27231e] cursor-pointer';
+      a.setAttribute('data-index', String(index));
+
+      // Close modal upon click so it is dismissed when navigating
+      a.addEventListener('click', () => {
+        closeModal();
+      });
+
+      const tagsHtml = Array.isArray(item.tags)
+        ? item.tags.slice(0, 3).map(t => `<span class="opacity-75">#${t}</span>`).join(' ')
+        : '';
 
       a.innerHTML = `
         <div class="flex items-center justify-between gap-2 mb-1">
           <span class="text-sm font-semibold text-[#231f1c] dark:text-[#f3ede4] line-clamp-1">${item.title}</span>
-          <span class="text-[11px] font-mono text-[#8c8275] shrink-0">${item.pubDate}</span>
+          <span class="text-[11px] font-mono text-[#8c8275] shrink-0">${item.pubDate || ''}</span>
         </div>
-        <p class="text-xs text-[#5a5249] dark:text-[#b8b0a4] font-serif line-clamp-1 mb-1.5">${item.description}</p>
-        <div class="flex items-center gap-1.5 text-[10px] font-mono text-[#756c63]">
-          <span class="px-1.5 py-0.5 rounded bg-[#f2ece0] dark:bg-[#28241f] text-[#554d45] dark:text-[#c4bcaf]">${item.category}</span>
-          ${item.tags.map(t => `<span class="opacity-75">#${t}</span>`).slice(0, 3).join(' ')}
+        <p class="text-xs text-[#5a5249] dark:text-[#b8b0a4] font-serif line-clamp-1 mb-1.5">${item.description || ''}</p>
+        <div class="flex items-center gap-2 text-[10px] font-mono text-[#756c63] dark:text-[#968d81]">
+          <span class="px-1.5 py-0.5 rounded bg-[#f2ece0] dark:bg-[#28241f] text-[#554d45] dark:text-[#c4bcaf]">${item.category || 'Essay'}</span>
+          ${item.readingTime ? `<span>${item.readingTime}</span>` : ''}
+          ${tagsHtml}
         </div>
       `;
       return a;
     }
 
     function performSearch() {
+      const input = getInput();
+      const container = getContainer();
+      const countLabel = getCountLabel();
+      if (!input || !container) return;
+
       const query = input.value.trim().toLowerCase();
       if (!query) {
         renderSuggestions();
@@ -157,20 +182,20 @@
       if (!searchIndex) return;
 
       const results = searchIndex.filter((post) => {
-        const titleMatch = post.title.toLowerCase().includes(query);
-        const descMatch = post.description.toLowerCase().includes(query);
-        const tagMatch = post.tags.some((t) => t.toLowerCase().includes(query));
-        const catMatch = post.category.toLowerCase().includes(query);
+        const titleMatch = (post.title || '').toLowerCase().includes(query);
+        const descMatch = (post.description || '').toLowerCase().includes(query);
+        const tagMatch = Array.isArray(post.tags) && post.tags.some((t) => t.toLowerCase().includes(query));
+        const catMatch = (post.category || '').toLowerCase().includes(query);
         return titleMatch || descMatch || tagMatch || catMatch;
       });
 
-      resultsContainer.innerHTML = '';
+      container.innerHTML = '';
       selectedIndex = -1;
 
       if (!results.length) {
-        resultsContainer.innerHTML = `
-          <div class="py-8 text-center text-xs font-mono text-[#8c8275]">
-            No writing found matching "<span class="text-[#231f1c] dark:text-[#f3ede4]">${input.value}</span>"
+        container.innerHTML = `
+          <div class="py-10 text-center text-xs font-mono text-[#8c8275]">
+            No writing found matching "<span class="text-[#231f1c] dark:text-[#f3ede4] font-medium">${input.value}</span>"
           </div>
         `;
         if (countLabel) countLabel.textContent = '0 results';
@@ -179,49 +204,11 @@
 
       results.forEach((item, idx) => {
         const el = createResultElement(item, idx);
-        resultsContainer.appendChild(el);
+        container.appendChild(el);
       });
 
       if (countLabel) countLabel.textContent = `${results.length} found`;
     }
-
-    openBtn.addEventListener('click', openModal);
-    if (closeBtn) closeBtn.addEventListener('click', closeModal);
-
-    dialog.addEventListener('click', (e) => {
-      if (e.target === dialog) closeModal();
-    });
-
-    input.addEventListener('input', performSearch);
-
-    window.addEventListener('keydown', (e) => {
-      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
-        e.preventDefault();
-        if (dialog.classList.contains('hidden')) {
-          openModal();
-        } else {
-          closeModal();
-        }
-      } else if (e.key === 'Escape' && !dialog.classList.contains('hidden')) {
-        closeModal();
-      } else if (!dialog.classList.contains('hidden')) {
-        const items = resultsContainer.querySelectorAll('.search-result-item');
-        if (!items.length) return;
-
-        if (e.key === 'ArrowDown') {
-          e.preventDefault();
-          selectedIndex = (selectedIndex + 1) % items.length;
-          updateHighlight(items);
-        } else if (e.key === 'ArrowUp') {
-          e.preventDefault();
-          selectedIndex = (selectedIndex - 1 + items.length) % items.length;
-          updateHighlight(items);
-        } else if (e.key === 'Enter' && selectedIndex >= 0 && items[selectedIndex]) {
-          e.preventDefault();
-          items[selectedIndex].click();
-        }
-      }
-    });
 
     function updateHighlight(items) {
       items.forEach((item, idx) => {
@@ -233,8 +220,85 @@
         }
       });
     }
-  }
 
-  setupSearch();
-  document.addEventListener('astro:after-swap', setupSearch);
+    // Attach delegated events once to the document/window
+    if (!window.__searchModalInitialized) {
+      window.__searchModalInitialized = true;
+
+      // Click on any trigger button (.search-trigger-btn)
+      document.addEventListener('click', (e) => {
+        const trigger = e.target && e.target.closest ? e.target.closest('.search-trigger-btn') : null;
+        if (trigger) {
+          e.preventDefault();
+          openModal();
+          return;
+        }
+
+        const closeBtn = e.target && e.target.closest ? e.target.closest('#search-close-btn') : null;
+        if (closeBtn) {
+          e.preventDefault();
+          closeModal();
+          return;
+        }
+
+        // Click outside the card (on backdrop)
+        const dialog = getDialog();
+        if (dialog && e.target === dialog) {
+          closeModal();
+        }
+      });
+
+      // Keyboard shortcuts
+      window.addEventListener('keydown', (e) => {
+        const dialog = getDialog();
+        const isOpen = dialog && !dialog.classList.contains('hidden');
+
+        // Cmd+K / Ctrl+K
+        if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+          e.preventDefault();
+          if (isOpen) {
+            closeModal();
+          } else {
+            openModal();
+          }
+          return;
+        }
+
+        // ESC key
+        if (e.key === 'Escape' && isOpen) {
+          e.preventDefault();
+          closeModal();
+          return;
+        }
+
+        // Arrow navigation & Enter when modal is open
+        if (isOpen) {
+          const container = getContainer();
+          if (!container) return;
+          const items = container.querySelectorAll('.search-result-item');
+          if (!items.length) return;
+
+          if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            selectedIndex = (selectedIndex + 1) % items.length;
+            updateHighlight(items);
+          } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            selectedIndex = (selectedIndex - 1 + items.length) % items.length;
+            updateHighlight(items);
+          } else if (e.key === 'Enter' && selectedIndex >= 0 && items[selectedIndex]) {
+            e.preventDefault();
+            items[selectedIndex].click();
+          }
+        }
+      });
+
+      // Live search input
+      document.addEventListener('input', (e) => {
+        if (e.target && e.target.id === 'search-input') {
+          performSearch();
+        }
+      });
+    }
+  })();
 </script>
