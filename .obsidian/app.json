@@ -1,0 +1,14 @@
+{
+  "attachmentFolderPath": "public/images",
+  "newFileLocation": "folder",
+  "newFileFolderPath": "src/content/blog",
+  "useMarkdownLinks": false,
+  "livePreview": true,
+  "userIgnoreFilters": [
+    "node_modules",
+    "dist",
+    ".astro",
+    ".git",
+    ".gemini"
+  ]
+}

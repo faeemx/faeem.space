@@ -5,6 +5,7 @@ import mdx from '@astrojs/mdx';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import { unified } from '@astrojs/markdown-remark';
+import { remarkObsidian } from './src/utils/remark-obsidian';
 
 import sitemap from '@astrojs/sitemap';
 
@@ -17,6 +18,7 @@ export default defineConfig({
   integrations: [mdx(), sitemap()],
   markdown: {
     processor: unified({
+      remarkPlugins: [remarkObsidian],
       rehypePlugins: [
         rehypeSlug,
         [
