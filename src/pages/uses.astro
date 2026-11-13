@@ -91,11 +91,11 @@ const sections = [
 >
   <div class="max-w-[720px] mx-auto space-y-12">
     <!-- Header -->
-    <header class="space-y-3 pb-8 border-b border-stone-200/80 dark:border-stone-800/80">
-      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-stone-950 dark:text-stone-50">
+    <header class="space-y-3 pb-8 border-b border-[#e8e0d2] dark:border-[#2f2a24]">
+      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-[#231f1c] dark:text-[#f3ede4]">
         Things I Use
       </h1>
-      <p class="text-base sm:text-lg text-stone-600 dark:text-stone-400 font-serif leading-relaxed">
+      <p class="text-base sm:text-lg text-[#5a5249] dark:text-[#b8b0a4] font-serif leading-relaxed">
         A curated list of the physical tools, pens, notebooks, coffee rituals, and quiet software I reach for every day.
       </p>
     </header>
@@ -105,21 +105,21 @@ const sections = [
       {sections.map((section) => (
         <section class="space-y-5">
           <div>
-            <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-stone-900 dark:text-stone-100">
+            <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-[#231f1c] dark:text-[#f3ede4]">
               {section.title}
             </h2>
-            <p class="text-xs sm:text-sm text-stone-500 dark:text-stone-400 mt-1">
+            <p class="text-xs sm:text-sm text-[#756c63] dark:text-[#968d81] mt-1">
               {section.description}
             </p>
           </div>
 
-          <div class="divide-y divide-stone-200/80 dark:divide-stone-800/80 rounded-xl border border-stone-200/80 dark:border-stone-800/80 bg-white/70 dark:bg-stone-900/20 overflow-hidden">
+          <div class="divide-y divide-[#e8e0d2] dark:divide-[#2f2a24] rounded-xl border border-[#e8e0d2] dark:border-[#2f2a24] bg-white dark:bg-[#1f1c19] overflow-hidden">
             {section.items.map((item) => (
               <div class="p-4 sm:p-5 flex flex-col gap-1">
-                <span class="text-sm font-semibold text-stone-900 dark:text-stone-100 font-mono">
+                <span class="text-sm font-semibold text-[#231f1c] dark:text-[#f3ede4] font-mono">
                   {item.name}
                 </span>
-                <span class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed font-serif">
+                <span class="text-sm text-[#5a5249] dark:text-[#b8b0a4] leading-relaxed font-serif">
                   {item.desc}
                 </span>
               </div>

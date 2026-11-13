@@ -11,14 +11,14 @@ const { posts } = Astro.props;
 ---
 
 {posts.length > 0 && (
-  <section class="mt-16 pt-8 border-t border-stone-200/80 dark:border-stone-800/80">
+  <section class="mt-16 pt-8 border-t border-[#e8e0d2] dark:border-[#2f2a24]">
     <div class="flex items-center justify-between mb-6">
-      <h3 class="text-sm font-mono font-semibold uppercase tracking-wider text-stone-500 dark:text-stone-400">
+      <h3 class="text-sm font-mono font-semibold uppercase tracking-wider text-[#756c63] dark:text-[#968d81]">
         More Writings
       </h3>
       <a
         href="/blog"
-        class="text-xs font-mono text-stone-500 dark:text-stone-400 hover:text-stone-950 dark:hover:text-stone-100 transition-colors"
+        class="text-xs font-mono text-[#756c63] dark:text-[#968d81] hover:text-[#231f1c] dark:hover:text-[#f3ede4] transition-colors"
       >
         View all &rarr;
       </a>
@@ -28,21 +28,21 @@ const { posts } = Astro.props;
       {posts.map((post) => (
         <a
           href={`/blog/${post.id}`}
-          class="group p-5 rounded-xl border border-stone-200/80 dark:border-stone-800/80 bg-white/60 dark:bg-stone-900/20 hover:border-stone-300 dark:hover:border-stone-700 transition-all flex flex-col justify-between"
+          class="group p-5 rounded-xl border border-[#e8e0d2] dark:border-[#2f2a24] bg-white dark:bg-[#1f1c19] hover:border-[#cfc4b2] dark:hover:border-[#423c34] transition-all flex flex-col justify-between"
         >
           <div>
-            <div class="flex items-center gap-2 text-xs font-mono text-stone-500 dark:text-stone-400 mb-2">
+            <div class="flex items-center gap-2 text-xs font-mono text-[#82786d] dark:text-[#91887c] mb-2">
               <time datetime={post.data.pubDate.toISOString()}>
                 {formatDate(post.data.pubDate)}
               </time>
               <span>&middot;</span>
               <span>{getReadingTime(post.body || '')}</span>
             </div>
-            <h4 class="text-base font-semibold text-stone-900 dark:text-stone-100 group-hover:text-amber-800 dark:group-hover:text-amber-400 transition-colors line-clamp-2">
+            <h4 class="text-base font-semibold text-[#231f1c] dark:text-[#f3ede4] group-hover:text-[#9e471d] dark:group-hover:text-[#e57e4b] transition-colors line-clamp-2">
               {post.data.title}
             </h4>
           </div>
-          <p class="mt-2 text-xs text-stone-600 dark:text-stone-400 font-serif line-clamp-2">
+          <p class="mt-2 text-xs text-[#5a5249] dark:text-[#b8b0a4] font-serif line-clamp-2">
             {post.data.description}
           </p>
         </a>

@@ -31,40 +31,40 @@ const featuredProjects = [
   <div class="space-y-16 sm:space-y-20">
     <!-- Hero / Personal Introduction -->
     <section class="space-y-6 pt-4">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono border border-amber-600/20 bg-amber-500/10 text-amber-800 dark:text-amber-300">
-        <span class="w-1.5 h-1.5 rounded-full bg-amber-600 dark:bg-amber-400"></span>
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono border border-[#dfceba] bg-[#f5eee3] text-[#853c15] dark:border-[#4d3525] dark:bg-[#291b12] dark:text-[#f39f75]">
+        <span class="w-1.5 h-1.5 rounded-full bg-[#9e471d] dark:bg-[#e57e4b]"></span>
         <span>Writing & thinking quietly</span>
       </div>
 
       <div class="space-y-4">
-        <h1 class="text-3xl sm:text-5xl font-bold tracking-tight text-stone-950 dark:text-stone-50 leading-tight">
+        <h1 class="text-3xl sm:text-5xl font-bold tracking-tight text-[#231f1c] dark:text-[#f3ede4] leading-tight">
           Hi, I'm Faeem. <br />
-          <span class="text-stone-500 dark:text-stone-400 font-normal">
+          <span class="text-[#756c63] dark:text-[#968d81] font-normal">
             Writer, creator, and curious observer.
           </span>
         </h1>
-        <p class="text-base sm:text-lg text-stone-600 dark:text-stone-300 leading-relaxed max-w-2xl font-serif">
+        <p class="text-base sm:text-lg text-[#4d443b] dark:text-[#ccc4b6] leading-relaxed max-w-2xl font-serif">
           Welcome to my quiet corner of the internet. This site is a personal notebook where I share longform essays on craft, small self-made tools, books I'm reading, and reflections on living intentionally in an over-connected world.
         </p>
       </div>
 
       <!-- Quick Links / Details -->
-      <div class="flex flex-wrap items-center gap-4 text-xs font-mono text-stone-500 dark:text-stone-400 pt-2">
+      <div class="flex flex-wrap items-center gap-4 text-xs font-mono text-[#756c63] dark:text-[#968d81] pt-2">
         <div class="flex items-center gap-1.5">
-          <svg class="w-4 h-4 text-stone-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg class="w-4 h-4 text-[#8c8275]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
           </svg>
           <span>Reading, walking, brewing tea</span>
         </div>
         <span>&middot;</span>
         <div class="flex items-center gap-1.5">
-          <svg class="w-4 h-4 text-stone-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg class="w-4 h-4 text-[#8c8275]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
           </svg>
           <span>Essays, notes & small tools</span>
         </div>
         <span>&middot;</span>
-        <a href="/about" class="underline hover:text-stone-900 dark:hover:text-stone-200">
+        <a href="/about" class="underline hover:text-[#231f1c] dark:hover:text-[#f3ede4]">
           More about me &rarr;
         </a>
       </div>
@@ -72,18 +72,18 @@ const featuredProjects = [
 
     <!-- Recent Essays Section -->
     <section class="space-y-6">
-      <div class="flex items-baseline justify-between border-b border-stone-200/80 dark:border-stone-800/80 pb-4">
+      <div class="flex items-baseline justify-between border-b border-[#e8e0d2] dark:border-[#2f2a24] pb-4">
         <div>
-          <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-stone-950 dark:text-stone-50">
+          <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-[#231f1c] dark:text-[#f3ede4]">
             Recent Essays
           </h2>
-          <p class="text-xs sm:text-sm text-stone-500 dark:text-stone-400 mt-1">
+          <p class="text-xs sm:text-sm text-[#756c63] dark:text-[#968d81] mt-1">
             Reflections on creative work, quiet computing, and everyday life.
           </p>
         </div>
         <a
           href="/blog"
-          class="text-xs font-mono text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200 transition-colors inline-flex items-center gap-1"
+          class="text-xs font-mono text-[#756c63] dark:text-[#968d81] hover:text-[#231f1c] dark:hover:text-[#f3ede4] transition-colors inline-flex items-center gap-1"
         >
           <span>All essays</span>
           <span>&rarr;</span>
@@ -96,25 +96,25 @@ const featuredProjects = [
             <PostCard post={post} />
           ))
         ) : (
-          <p class="text-sm text-stone-500">No essays published yet.</p>
+          <p class="text-sm text-[#756c63]">No essays published yet.</p>
         )}
       </div>
     </section>
 
     <!-- Selected Creations Section -->
     <section class="space-y-6">
-      <div class="flex items-baseline justify-between border-b border-stone-200/80 dark:border-stone-800/80 pb-4">
+      <div class="flex items-baseline justify-between border-b border-[#e8e0d2] dark:border-[#2f2a24] pb-4">
         <div>
-          <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-stone-950 dark:text-stone-50">
+          <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-[#231f1c] dark:text-[#f3ede4]">
             Small Creations
           </h2>
-          <p class="text-xs sm:text-sm text-stone-500 dark:text-stone-400 mt-1">
+          <p class="text-xs sm:text-sm text-[#756c63] dark:text-[#968d81] mt-1">
             Personal tools and gentle software experiments built for daily use.
           </p>
         </div>
         <a
           href="/projects"
-          class="text-xs font-mono text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200 transition-colors inline-flex items-center gap-1"
+          class="text-xs font-mono text-[#756c63] dark:text-[#968d81] hover:text-[#231f1c] dark:hover:text-[#f3ede4] transition-colors inline-flex items-center gap-1"
         >
           <span>All projects</span>
           <span>&rarr;</span>

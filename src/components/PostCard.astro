@@ -12,9 +12,9 @@ const { post } = Astro.props;
 const readingTime = getReadingTime(post.body || '');
 ---
 
-<article class="group relative flex flex-col items-start p-5 sm:p-6 rounded-xl border border-stone-200/80 dark:border-stone-800/80 bg-white/70 dark:bg-stone-900/20 hover:border-stone-300 dark:hover:border-stone-700 hover:shadow-xs transition-all">
+<article class="group relative flex flex-col items-start p-5 sm:p-6 rounded-xl border border-[#e8e0d2] dark:border-[#2f2a24] bg-white dark:bg-[#1f1c19] hover:border-[#cfc4b2] dark:hover:border-[#423c34] hover:shadow-xs transition-all">
   <!-- Metadata row -->
-  <div class="flex flex-wrap items-center gap-2 text-xs font-mono text-stone-500 dark:text-stone-400 mb-2.5">
+  <div class="flex flex-wrap items-center gap-2 text-xs font-mono text-[#82786d] dark:text-[#91887c] mb-2.5">
     <time datetime={post.data.pubDate.toISOString()}>
       {formatDate(post.data.pubDate)}
     </time>
@@ -23,7 +23,7 @@ const readingTime = getReadingTime(post.body || '');
     {post.data.category && (
       <>
         <span>&middot;</span>
-        <span class="px-2 py-0.5 rounded text-[11px] font-medium bg-stone-100 text-stone-700 dark:bg-stone-800 dark:text-stone-300">
+        <span class="px-2 py-0.5 rounded text-[11px] font-medium bg-[#f2ece0] text-[#554d45] dark:bg-[#28241f] dark:text-[#c4bcaf]">
           {post.data.category}
         </span>
       </>
@@ -31,7 +31,7 @@ const readingTime = getReadingTime(post.body || '');
   </div>
 
   <!-- Title -->
-  <h2 class="text-lg sm:text-xl font-semibold tracking-tight text-stone-900 dark:text-stone-100 group-hover:text-amber-800 dark:group-hover:text-amber-400 transition-colors">
+  <h2 class="text-lg sm:text-xl font-semibold tracking-tight text-[#231f1c] dark:text-[#f3ede4] group-hover:text-[#9e471d] dark:group-hover:text-[#e57e4b] transition-colors">
     <a href={`/blog/${post.id}`}>
       <span class="absolute inset-0"></span>
       {post.data.title}
@@ -39,7 +39,7 @@ const readingTime = getReadingTime(post.body || '');
   </h2>
 
   <!-- Description -->
-  <p class="mt-2 text-sm text-stone-600 dark:text-stone-400 font-serif leading-relaxed line-clamp-2">
+  <p class="mt-2 text-sm sm:text-base text-[#5a5249] dark:text-[#b8b0a4] font-serif leading-relaxed line-clamp-2">
     {post.data.description}
   </p>
 

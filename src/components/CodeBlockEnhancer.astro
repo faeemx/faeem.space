@@ -26,20 +26,20 @@
 
       // Create wrapper
       const wrapper = document.createElement('div');
-      wrapper.className = 'code-block-wrapper relative my-6 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80 overflow-hidden bg-[#101318] dark:bg-[#101318]';
+      wrapper.className = 'code-block-wrapper relative my-6 rounded-xl border border-[#e8e0d2] dark:border-[#2f2a24] overflow-hidden bg-[#f4efe5] dark:bg-[#1a1714]';
       
       // Create top header bar
       const header = document.createElement('div');
-      header.className = 'flex items-center justify-between px-4 py-2 border-b border-zinc-800/80 bg-[#141820] text-zinc-400 text-xs font-mono select-none';
+      header.className = 'flex items-center justify-between px-4 py-2 border-b border-[#e4dccf] dark:border-[#2f2a24] bg-[#ebe3d7] dark:bg-[#221e1a] text-[#635b52] dark:text-[#a39a8e] text-xs font-mono select-none';
 
       const langSpan = document.createElement('span');
-      langSpan.className = 'text-[11px] font-semibold uppercase tracking-wider text-zinc-400';
-      langSpan.textContent = lang || 'code';
+      langSpan.className = 'text-[11px] font-semibold uppercase tracking-wider text-[#635b52] dark:text-[#a39a8e]';
+      langSpan.textContent = lang || 'notes';
 
       // Copy button
       const copyBtn = document.createElement('button');
       copyBtn.type = 'button';
-      copyBtn.className = 'flex items-center gap-1.5 px-2 py-1 rounded text-[11px] text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 transition-colors focus:outline-none';
+      copyBtn.className = 'flex items-center gap-1.5 px-2 py-1 rounded text-[11px] text-[#635b52] dark:text-[#a39a8e] hover:text-[#231f1c] dark:hover:text-[#f3ede4] hover:bg-[#ded4c5] dark:hover:bg-[#2e2924] transition-colors focus:outline-none';
       copyBtn.setAttribute('aria-label', 'Copy code to clipboard');
       copyBtn.innerHTML = `
         <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -53,10 +53,10 @@
         try {
           await navigator.clipboard.writeText(codeText);
           copyBtn.innerHTML = `
-            <svg class="w-3.5 h-3.5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg class="w-3.5 h-3.5 text-[#9e471d] dark:text-[#e57e4b]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
             </svg>
-            <span class="text-emerald-400">Copied!</span>
+            <span class="text-[#9e471d] dark:text-[#e57e4b]">Copied!</span>
           `;
           setTimeout(() => {
             copyBtn.innerHTML = `

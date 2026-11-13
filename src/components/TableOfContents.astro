@@ -18,14 +18,14 @@ const filtered = headings.filter((h) => h.depth === 2 || h.depth === 3);
 {filtered.length > 1 && (
   <nav
     id="article-toc"
-    class="my-8 p-5 rounded-xl border border-stone-200/80 dark:border-stone-800/80 bg-stone-100/60 dark:bg-stone-900/30 transition-colors"
+    class="my-8 p-5 rounded-xl border border-[#e8e0d2] dark:border-[#2f2a24] bg-[#f6f1e8] dark:bg-[#1f1c19] transition-colors"
     aria-label="Table of contents"
   >
     <div class="flex items-center justify-between mb-3">
-      <span class="text-xs font-mono font-semibold uppercase tracking-wider text-stone-500 dark:text-stone-400">
+      <span class="text-xs font-mono font-semibold uppercase tracking-wider text-[#756c63] dark:text-[#968d81]">
         In this essay
       </span>
-      <span class="text-[11px] font-mono text-stone-400 dark:text-stone-500">
+      <span class="text-[11px] font-mono text-[#8c8275] dark:text-[#91887c]">
         {filtered.length} sections
       </span>
     </div>
@@ -38,7 +38,7 @@ const filtered = headings.filter((h) => h.depth === 2 || h.depth === 3);
             <a
               href={`#${heading.slug}`}
               data-slug={heading.slug}
-              class="toc-link block py-0.5 text-stone-600 dark:text-stone-400 hover:text-stone-950 dark:hover:text-stone-100 transition-colors border-l-2 border-transparent pl-2.5 -ml-2.5"
+              class="toc-link block py-0.5 text-[#635b52] dark:text-[#a39a8e] hover:text-[#231f1c] dark:hover:text-[#f3ede4] transition-colors border-l-2 border-transparent pl-2.5 -ml-2.5"
             >
               {cleanText}
             </a>
@@ -71,20 +71,20 @@ const filtered = headings.filter((h) => h.depth === 2 || h.depth === 3);
             tocLinks.forEach((link) => {
               if (link.getAttribute('data-slug') === id) {
                 link.classList.add(
-                  'text-stone-950',
-                  'dark:text-stone-100',
+                  'text-[#231f1c]',
+                  'dark:text-[#f3ede4]',
                   'font-medium',
-                  'border-stone-900',
-                  'dark:border-stone-200'
+                  'border-[#9e471d]',
+                  'dark:border-[#e57e4b]'
                 );
                 link.classList.remove('border-transparent');
               } else {
                 link.classList.remove(
-                  'text-stone-950',
-                  'dark:text-stone-100',
+                  'text-[#231f1c]',
+                  'dark:text-[#f3ede4]',
                   'font-medium',
-                  'border-stone-900',
-                  'dark:border-stone-200'
+                  'border-[#9e471d]',
+                  'dark:border-[#e57e4b]'
                 );
                 link.classList.add('border-transparent');
               }

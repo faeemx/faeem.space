@@ -6,14 +6,14 @@
 <button
   type="button"
   id="search-open-btn"
-  class="flex items-center gap-2 px-2.5 py-1.5 text-xs font-mono text-stone-600 dark:text-stone-400 hover:text-stone-950 dark:hover:text-stone-100 hover:bg-stone-200/50 dark:hover:bg-stone-800/60 rounded-md border border-stone-200/80 dark:border-stone-800/80 transition-colors"
+  class="flex items-center gap-2 px-2.5 py-1.5 text-xs font-mono text-[#756c63] dark:text-[#968d81] hover:text-[#231f1c] dark:hover:text-[#f3ede4] hover:bg-[#f0e8dc]/60 dark:hover:bg-[#26221d]/60 rounded-md border border-[#e8e0d2] dark:border-[#2f2a24] transition-colors"
   aria-label="Search writings"
 >
   <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
   </svg>
   <span class="hidden sm:inline">Search</span>
-  <kbd class="hidden sm:inline-block px-1.5 py-0.5 text-[10px] bg-stone-200/80 dark:bg-stone-800 rounded text-stone-600 dark:text-stone-400 font-mono">
+  <kbd class="hidden sm:inline-block px-1.5 py-0.5 text-[10px] bg-[#f0e8dc] dark:bg-[#28241f] rounded text-[#554d45] dark:text-[#c4bcaf] font-mono">
     ⌘K
   </kbd>
 </button>
@@ -21,21 +21,21 @@
 <!-- Modal Backdrop & Dialog -->
 <div
   id="search-dialog"
-  class="fixed inset-0 z-50 hidden bg-black/40 backdrop-blur-xs p-4 sm:p-6 md:p-20 overflow-y-auto"
+  class="fixed inset-0 z-50 hidden bg-[#231f1c]/40 backdrop-blur-xs p-4 sm:p-6 md:p-20 overflow-y-auto"
   role="dialog"
   aria-modal="true"
   aria-labelledby="search-modal-title"
 >
-  <div class="max-w-xl mx-auto bg-[#fafaf9] dark:bg-[#14161b] border border-stone-200 dark:border-stone-800 rounded-2xl shadow-xl overflow-hidden transition-all">
+  <div class="max-w-xl mx-auto bg-[#fbf8f3] dark:bg-[#1c1917] border border-[#e8e0d2] dark:border-[#2f2a24] rounded-2xl shadow-xl overflow-hidden transition-all">
     <!-- Search Input Header -->
-    <div class="flex items-center px-4 py-3 border-b border-stone-200 dark:border-stone-800 gap-3">
-      <svg class="w-5 h-5 text-stone-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <div class="flex items-center px-4 py-3 border-b border-[#e8e0d2] dark:border-[#2f2a24] gap-3">
+      <svg class="w-5 h-5 text-[#8c8275] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
       </svg>
       <input
         type="text"
         id="search-input"
-        class="w-full bg-transparent text-sm text-stone-900 dark:text-stone-100 placeholder-stone-400 focus:outline-none"
+        class="w-full bg-transparent text-sm text-[#231f1c] dark:text-[#f3ede4] placeholder-[#8c8275] focus:outline-none"
         placeholder="Search essays by title, topic, or keyword..."
         autocomplete="off"
         spellcheck="false"
@@ -43,7 +43,7 @@
       <button
         type="button"
         id="search-close-btn"
-        class="text-xs font-mono px-2 py-1 text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 rounded"
+        class="text-xs font-mono px-2 py-1 text-[#8c8275] hover:text-[#231f1c] dark:hover:text-[#f3ede4] rounded"
         aria-label="Close search"
       >
         <kbd class="text-[11px]">ESC</kbd>
@@ -52,13 +52,13 @@
 
     <!-- Search Results List -->
     <div id="search-results-container" class="max-h-[380px] overflow-y-auto p-2 space-y-1">
-      <div id="search-empty-state" class="py-12 text-center text-xs font-mono text-stone-500">
+      <div id="search-empty-state" class="py-12 text-center text-xs font-mono text-[#8c8275]">
         Type to search essays...
       </div>
     </div>
 
     <!-- Modal Footer -->
-    <div class="px-4 py-2.5 bg-stone-100/70 dark:bg-stone-900/60 border-t border-stone-200 dark:border-stone-800 flex items-center justify-between text-[11px] font-mono text-stone-500">
+    <div class="px-4 py-2.5 bg-[#f5efe4] dark:bg-[#221e1a] border-t border-[#e8e0d2] dark:border-[#2f2a24] flex items-center justify-between text-[11px] font-mono text-[#756c63] dark:text-[#968d81]">
       <div class="flex items-center gap-3">
         <span><kbd>↑</kbd> <kbd>↓</kbd> Navigate</span>
         <span><kbd>↵</kbd> Select</span>
@@ -116,7 +116,7 @@
       resultsContainer.innerHTML = '';
       
       const label = document.createElement('div');
-      label.className = 'px-3 py-2 text-[11px] font-mono text-stone-500 dark:text-stone-400 uppercase tracking-wider';
+      label.className = 'px-3 py-2 text-[11px] font-mono text-[#756c63] dark:text-[#968d81] uppercase tracking-wider';
       label.textContent = 'Recent Writing';
       resultsContainer.appendChild(label);
 
@@ -130,17 +130,17 @@
     function createResultElement(item, index) {
       const a = document.createElement('a');
       a.href = item.url;
-      a.className = 'search-result-item block px-3 py-2.5 rounded-lg text-left transition-colors hover:bg-stone-200/60 dark:hover:bg-stone-800/80';
+      a.className = 'search-result-item block px-3 py-2.5 rounded-lg text-left transition-colors hover:bg-[#ede5d8] dark:hover:bg-[#27231e]';
       a.setAttribute('data-index', index);
 
       a.innerHTML = `
         <div class="flex items-center justify-between gap-2 mb-1">
-          <span class="text-sm font-semibold text-stone-900 dark:text-stone-100 line-clamp-1">${item.title}</span>
-          <span class="text-[11px] font-mono text-stone-400 shrink-0">${item.pubDate}</span>
+          <span class="text-sm font-semibold text-[#231f1c] dark:text-[#f3ede4] line-clamp-1">${item.title}</span>
+          <span class="text-[11px] font-mono text-[#8c8275] shrink-0">${item.pubDate}</span>
         </div>
-        <p class="text-xs text-stone-600 dark:text-stone-400 font-serif line-clamp-1 mb-1.5">${item.description}</p>
-        <div class="flex items-center gap-1.5 text-[10px] font-mono text-stone-500">
-          <span class="px-1.5 py-0.5 rounded bg-stone-200/80 dark:bg-stone-800 text-stone-700 dark:text-stone-300">${item.category}</span>
+        <p class="text-xs text-[#5a5249] dark:text-[#b8b0a4] font-serif line-clamp-1 mb-1.5">${item.description}</p>
+        <div class="flex items-center gap-1.5 text-[10px] font-mono text-[#756c63]">
+          <span class="px-1.5 py-0.5 rounded bg-[#f2ece0] dark:bg-[#28241f] text-[#554d45] dark:text-[#c4bcaf]">${item.category}</span>
           ${item.tags.map(t => `<span class="opacity-75">#${t}</span>`).slice(0, 3).join(' ')}
         </div>
       `;
@@ -169,8 +169,8 @@
 
       if (!results.length) {
         resultsContainer.innerHTML = `
-          <div class="py-8 text-center text-xs font-mono text-stone-500">
-            No writing found matching "<span class="text-stone-800 dark:text-stone-200">${input.value}</span>"
+          <div class="py-8 text-center text-xs font-mono text-[#8c8275]">
+            No writing found matching "<span class="text-[#231f1c] dark:text-[#f3ede4]">${input.value}</span>"
           </div>
         `;
         if (countLabel) countLabel.textContent = '0 results';
@@ -226,10 +226,10 @@
     function updateHighlight(items) {
       items.forEach((item, idx) => {
         if (idx === selectedIndex) {
-          item.classList.add('bg-stone-200/80', 'dark:bg-stone-800');
+          item.classList.add('bg-[#ede5d8]', 'dark:bg-[#27231e]');
           item.scrollIntoView({ block: 'nearest' });
         } else {
-          item.classList.remove('bg-stone-200/80', 'dark:bg-stone-800');
+          item.classList.remove('bg-[#ede5d8]', 'dark:bg-[#27231e]');
         }
       });
     }

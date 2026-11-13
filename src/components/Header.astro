@@ -19,7 +19,7 @@ function isActive(href: string): boolean {
 }
 ---
 
-<header class="sticky top-0 z-40 w-full border-b border-stone-200/80 dark:border-stone-800/70 bg-[#fafaf9]/90 dark:bg-[#111215]/90 backdrop-blur-md transition-colors">
+<header class="sticky top-0 z-40 w-full border-b border-[#e8e0d2] dark:border-[#2f2a24] bg-[#fbf8f3]/90 dark:bg-[#171513]/90 backdrop-blur-md transition-colors">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-2">
     <!-- Brand -->
     <a href="/" class="group flex items-center gap-2 font-mono text-base font-semibold tracking-tight text-stone-900 dark:text-stone-100">
@@ -35,14 +35,14 @@ function isActive(href: string): boolean {
           class:list={[
             "px-3 py-1.5 text-sm rounded-md transition-colors",
             isActive(item.href)
-              ? "text-stone-950 dark:text-stone-100 font-medium bg-stone-200/70 dark:bg-stone-800/60"
-              : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200 hover:bg-stone-200/40 dark:hover:bg-stone-800/30"
+              ? "text-[#231f1c] dark:text-[#f3ede4] font-medium bg-[#f0e8dc] dark:bg-[#26221d]"
+              : "text-[#756c63] dark:text-[#968d81] hover:text-[#231f1c] dark:hover:text-[#f3ede4] hover:bg-[#f0e8dc]/50 dark:hover:bg-[#26221d]/40"
           ]}
         >
           {item.label}
         </a>
       ))}
-      <div class="h-4 w-px bg-stone-200 dark:bg-stone-800 mx-1"></div>
+      <div class="h-4 w-px bg-[#e8e0d2] dark:bg-[#2f2a24] mx-1"></div>
       <SearchModal />
       <ThemeToggle />
     </nav>
@@ -69,15 +69,15 @@ function isActive(href: string): boolean {
   </div>
 
   <!-- Mobile Dropdown -->
-  <div id="mobile-menu" class="hidden sm:hidden border-t border-stone-200 dark:border-stone-800 px-4 py-3 bg-[#fafaf9] dark:bg-[#111215]">
+  <div id="mobile-menu" class="hidden sm:hidden border-t border-[#e8e0d2] dark:border-[#2f2a24] px-4 py-3 bg-[#fbf8f3] dark:bg-[#171513]">
     <div class="flex flex-col space-y-1">
       <a
         href="/"
         class:list={[
           "px-3 py-2 text-sm rounded-md transition-colors",
           currentPath === '/'
-            ? "text-stone-950 dark:text-stone-100 font-medium bg-stone-200/70 dark:bg-stone-800/60"
-            : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200"
+            ? "text-[#231f1c] dark:text-[#f3ede4] font-medium bg-[#f0e8dc] dark:bg-[#26221d]"
+            : "text-[#756c63] dark:text-[#968d81] hover:text-[#231f1c] dark:hover:text-[#f3ede4]"
         ]}
       >
         Home
@@ -88,8 +88,8 @@ function isActive(href: string): boolean {
           class:list={[
             "px-3 py-2 text-sm rounded-md transition-colors",
             isActive(item.href)
-              ? "text-stone-950 dark:text-stone-100 font-medium bg-stone-200/70 dark:bg-stone-800/60"
-              : "text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200"
+              ? "text-[#231f1c] dark:text-[#f3ede4] font-medium bg-[#f0e8dc] dark:bg-[#26221d]"
+              : "text-[#756c63] dark:text-[#968d81] hover:text-[#231f1c] dark:hover:text-[#f3ede4]"
           ]}
         >
           {item.label}
