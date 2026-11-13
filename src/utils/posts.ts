@@ -1,0 +1,53 @@
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+export type BlogPost = CollectionEntry<'blog'>;
+
+/**
+ * Returns all published blog posts sorted by publication date (newest first).
+ * In accordance with content rules, draft articles are always filtered out.
+ */
+export async function getPublishedPosts(): Promise<BlogPost[]> {
+  const posts = await getCollection('blog', (entry) => {
+    return entry.data.draft !== true;
+  });
+
+  return posts.sort((a, b) => {
+    return new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime();
+  });
+}
+
+/**
+ * Formats a Date object to a readable string (e.g. "Nov 13, 2026").
+ */
+export function formatDate(date: Date): string {
+  return new Intl.DateTimeFormat('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    timeZone: 'UTC',
+  }).format(new Date(date));
+}
+
+export interface TagCount {
+  name: string;
+  count: number;
+}
+
+/**
+ * Aggregates all unique tags from published posts along with post counts.
+ */
+export async function getAllTags(): Promise<TagCount[]> {
+  const posts = await getPublishedPosts();
+  const tagMap = new Map<string, number>();
+
+  for (const post of posts) {
+    for (const tag of post.data.tags || []) {
+      const normalized = tag.toLowerCase().trim();
+      tagMap.set(normalized, (tagMap.get(normalized) || 0) + 1);
+    }
+  }
+
+  return Array.from(tagMap.entries())
+    .map(([name, count]) => ({ name, count }))
+    .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
+}

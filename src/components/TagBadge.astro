@@ -1,0 +1,24 @@
+---
+interface Props {
+  tag: string;
+  count?: number;
+  active?: boolean;
+}
+
+const { tag, count, active = false } = Astro.props;
+---
+
+<a
+  href={`/tags/${encodeURIComponent(tag.toLowerCase())}`}
+  class:list={[
+    "inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-mono rounded-md border transition-colors",
+    active
+      ? "bg-zinc-200 text-zinc-900 border-zinc-300 dark:bg-zinc-800 dark:text-zinc-100 dark:border-zinc-700 font-medium"
+      : "bg-zinc-100/60 text-zinc-600 border-zinc-200/80 hover:text-zinc-900 hover:border-zinc-300 dark:bg-zinc-900/50 dark:text-zinc-400 dark:border-zinc-800 dark:hover:text-zinc-200 dark:hover:border-zinc-700"
+  ]}
+>
+  <span>#{tag}</span>
+  {count !== undefined && (
+    <span class="text-[11px] opacity-60">({count})</span>
+  )}
+</a>

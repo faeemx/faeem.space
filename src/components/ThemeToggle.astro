@@ -1,0 +1,66 @@
+---
+// ThemeToggle.astro
+---
+
+<button
+  type="button"
+  id="theme-toggle"
+  class="relative inline-flex items-center justify-center p-2 rounded-lg text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/60 dark:hover:bg-zinc-800/80 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400"
+  aria-label="Toggle color theme"
+>
+  <!-- Sun icon (shown in dark mode) -->
+  <svg
+    id="theme-toggle-light-icon"
+    class="w-4 h-4 hidden dark:block"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    stroke-width="2"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      d="M12 3v1m0 16v1m9-9h-1M4 9h1m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z"
+    />
+  </svg>
+
+  <!-- Moon icon (shown in light mode) -->
+  <svg
+    id="theme-toggle-dark-icon"
+    class="w-4 h-4 block dark:hidden text-zinc-700 hover:text-zinc-950"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    stroke-width="2"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+    />
+  </svg>
+</button>
+
+<script is:inline>
+  function setupThemeToggle() {
+    const toggleBtn = document.getElementById('theme-toggle');
+    if (!toggleBtn) return;
+
+    toggleBtn.addEventListener('click', () => {
+      const isCurrentlyLight = document.documentElement.classList.contains('light');
+      if (isCurrentlyLight) {
+        document.documentElement.classList.remove('light');
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+        document.documentElement.classList.add('light');
+        localStorage.setItem('theme', 'light');
+      }
+    });
+  }
+
+  // Run on initial load and after Astro page swaps if view transitions are used
+  setupThemeToggle();
+  document.addEventListener('astro:after-swap', setupThemeToggle);
+</script>

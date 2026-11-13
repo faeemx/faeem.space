@@ -1,0 +1,203 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Literata", Georgia, Cambria, "Times New Roman", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+  }
+  html.light {
+    color-scheme: light;
+  }
+
+  body {
+    @apply bg-[#0b0d11] text-[#e1e4ea] font-sans antialiased selection:bg-zinc-800 selection:text-zinc-100 min-h-screen flex flex-col transition-colors duration-200;
+  }
+
+  html.light body {
+    @apply bg-[#fbfbfd] text-[#1c2025] selection:bg-zinc-200 selection:text-zinc-900;
+  }
+}
+
+/* Custom editorial prose styles for article body */
+.article-prose {
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: #d1d5db;
+}
+
+html.light .article-prose {
+  color: #27272a;
+}
+
+.article-prose h1,
+.article-prose h2,
+.article-prose h3,
+.article-prose h4 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: #f3f4f6;
+  scroll-margin-top: 5rem;
+}
+
+html.light .article-prose h1,
+html.light .article-prose h2,
+html.light .article-prose h3,
+html.light .article-prose h4 {
+  color: #09090b;
+}
+
+.article-prose h1 {
+  font-size: 2rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.article-prose h2 {
+  font-size: 1.5rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 0.5rem;
+}
+
+html.light .article-prose h2 {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.article-prose h3 {
+  font-size: 1.25rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.article-prose p {
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.article-prose a {
+  color: #60a5fa;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: color 0.15s ease;
+}
+
+.article-prose a:hover {
+  color: #93c5fd;
+}
+
+html.light .article-prose a {
+  color: #2563eb;
+}
+
+html.light .article-prose a:hover {
+  color: #1d4ed8;
+}
+
+.article-prose strong {
+  font-weight: 600;
+  color: #f9fafb;
+}
+
+html.light .article-prose strong {
+  color: #111827;
+}
+
+.article-prose ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.article-prose ol {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.article-prose li {
+  margin-top: 0.375rem;
+  margin-bottom: 0.375rem;
+}
+
+.article-prose blockquote {
+  border-left: 3px solid rgba(255, 255, 255, 0.2);
+  padding-left: 1.25rem;
+  margin: 1.75rem 0;
+  font-style: italic;
+  color: #9ca3af;
+}
+
+html.light .article-prose blockquote {
+  border-left-color: rgba(0, 0, 0, 0.2);
+  color: #4b5563;
+}
+
+.article-prose code:not(pre code) {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  padding: 0.2em 0.4em;
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.25rem;
+  color: #f3f4f6;
+}
+
+html.light .article-prose code:not(pre code) {
+  background-color: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.08);
+  color: #1f2937;
+}
+
+.article-prose pre {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  line-height: 1.6;
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  margin: 1.75rem 0;
+  overflow-x: auto;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: #101318 !important;
+}
+
+html.light .article-prose pre {
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background-color: #f8fafc !important;
+}
+
+.article-prose hr {
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 3rem 0;
+}
+
+html.light .article-prose hr {
+  border-top-color: rgba(0, 0, 0, 0.1);
+}
+
+.article-prose img {
+  border-radius: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  margin: 2rem 0;
+  max-width: 100%;
+  height: auto;
+}
+
+html.light .article-prose img {
+  border-color: rgba(0, 0, 0, 0.08);
+}

@@ -1,0 +1,69 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="About"
+  description="Background, engineering philosophy, and personal story of Mando."
+>
+  <div class="max-w-[720px] mx-auto space-y-12">
+    <!-- Header -->
+    <header class="space-y-3 pb-8 border-b border-zinc-200/80 dark:border-zinc-800/80">
+      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-zinc-950 dark:text-zinc-50">
+        About Me
+      </h1>
+      <p class="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 font-serif leading-relaxed">
+        I am a software engineer focused on building robust, performant software systems that solve real problems with minimal accidental complexity.
+      </p>
+    </header>
+
+    <!-- Bio Sections with Editorial Typography -->
+    <section class="article-prose space-y-6">
+      <h2>Background</h2>
+      <p>
+        I have spent over a decade working across the technology stack, from bare-metal Linux kernels and network daemons to high-throughput distributed microservices and modern frontend architectures.
+      </p>
+      <p>
+        My core interest lies at the intersection of <strong>systems programming</strong>, <strong>data storage architectures</strong>, and <strong>developer ergonomics</strong>. I believe that understanding the underlying operating system, disk I/O characteristics, and network protocols makes one an exponentially better software engineer.
+      </p>
+
+      <h2>Engineering Philosophy</h2>
+      <p>
+        Over the years, shipping code to production has instilled a few guiding principles that inform every line of code I write:
+      </p>
+      <ul>
+        <li>
+          <strong>Simplicity over cleverness:</strong> Code is read and debugged far more often than it is written. Boring, straightforward implementations with clear boundaries win over convoluted metaprogramming.
+        </li>
+        <li>
+          <strong>Observability is not an afterthought:</strong> If you cannot inspect the internal state of a running service using structured logs and clear metrics, you are running blind.
+        </li>
+        <li>
+          <strong>Respect the machine:</strong> Compute resources are finite. Writing efficient algorithms, avoiding memory bloat, and respecting cache hierarchies is good craftsmanship.
+        </li>
+        <li>
+          <strong>Minimal dependencies:</strong> Every third-party library is a liability in security, maintenance, and upgrade velocity. Vendor deliberately.
+        </li>
+      </ul>
+
+      <h2>What I'm Currently Exploring</h2>
+      <p>
+        These days, I spend my spare time experimenting with:
+      </p>
+      <ul>
+        <li>Building high-performance storage engines and log-structured merge trees in Rust.</li>
+        <li>Hardening my local homelab infrastructure with Debian, ZFS, WireGuard, and Docker.</li>
+        <li>Static site generation and edge compute workflows using Astro and Cloudflare.</li>
+        <li>Exploring distributed consensus protocols (Raft, Paxos) and write-ahead log designs.</li>
+      </ul>
+
+      <h2>Get in Touch</h2>
+      <p>
+        I enjoy conversing with fellow engineers, exchanging notes on homelabs, and discussing distributed systems challenges.
+      </p>
+      <p>
+        You can find my code on <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a>, follow my thoughts on <a href="https://x.com" target="_blank" rel="noopener noreferrer">Twitter / X</a>, or reach out directly via email at <code class="font-mono text-xs">mando [at] mando.dev</code>.
+      </p>
+    </section>
+  </div>
+</BaseLayout>

@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import TagBadge from '../../components/TagBadge.astro';
+import { getPublishedPosts, getAllTags } from '../../utils/posts';
+
+const posts = await getPublishedPosts();
+const tags = await getAllTags();
+---
+
+<BaseLayout
+  title="Blog"
+  description="All published articles, technical deep dives, and architectural notes by Mando."
+>
+  <div class="space-y-10">
+    <!-- Page Header -->
+    <header class="space-y-3">
+      <div class="flex items-center gap-2">
+        <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-zinc-950 dark:text-zinc-50">
+          Articles
+        </h1>
+        <span class="text-xs font-mono px-2 py-0.5 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">
+          {posts.length} {posts.length === 1 ? 'post' : 'posts'}
+        </span>
+      </div>
+      <p class="text-zinc-600 dark:text-zinc-400 max-w-xl text-base sm:text-lg">
+        Writing on backend systems, developer tooling, web architecture, and lessons learned building real-world software.
+      </p>
+    </header>
+
+    <!-- Tags list -->
+    {tags.length > 0 && (
+      <div class="pt-2 pb-4 border-y border-zinc-200/80 dark:border-zinc-800/80">
+        <div class="text-xs font-mono text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-2.5">
+          Filter by topic
+        </div>
+        <div class="flex flex-wrap gap-2">
+          {tags.map((tag) => (
+            <TagBadge tag={tag.name} count={tag.count} />
+          ))}
+        </div>
+      </div>
+    )}
+
+    <!-- Posts Feed -->
+    <div class="space-y-4">
+      {posts.length > 0 ? (
+        posts.map((post) => (
+          <PostCard post={post} />
+        ))
+      ) : (
+        <div class="p-8 text-center rounded-xl border border-dashed border-zinc-300 dark:border-zinc-800 text-zinc-500">
+          No articles published yet. Check back soon!
+        </div>
+      )}
+    </div>
+  </div>
+</BaseLayout>

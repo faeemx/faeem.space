@@ -1,0 +1,119 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+
+const currentPath = Astro.url.pathname;
+
+const navItems = [
+  { href: '/blog', label: 'Blog' },
+  { href: '/projects', label: 'Projects' },
+  { href: '/about', label: 'About' },
+  { href: '/uses', label: 'Uses' },
+];
+
+function isActive(href: string): boolean {
+  if (href === '/blog') {
+    return currentPath === '/blog' || currentPath.startsWith('/blog/') || currentPath.startsWith('/tags/');
+  }
+  return currentPath === href || currentPath.startsWith(`${href}/`);
+}
+---
+
+<header class="sticky top-0 z-40 w-full border-b border-zinc-200/80 dark:border-zinc-800/70 bg-[#fbfbfd]/80 dark:bg-[#0b0d11]/80 backdrop-blur-md transition-colors">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+    <!-- Brand -->
+    <a href="/" class="group flex items-center gap-2 font-mono text-base font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">
+      <span class="w-2 h-2 rounded-full bg-emerald-500 inline-block group-hover:scale-125 transition-transform"></span>
+      <span>mando<span class="text-zinc-400 dark:text-zinc-500">.dev</span></span>
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav class="hidden sm:flex items-center gap-1 sm:gap-2">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class:list={[
+            "px-3 py-1.5 text-sm rounded-md transition-colors",
+            isActive(item.href)
+              ? "text-zinc-950 dark:text-zinc-100 font-medium bg-zinc-100 dark:bg-zinc-800/60"
+              : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 hover:bg-zinc-100/50 dark:hover:bg-zinc-800/30"
+          ]}
+        >
+          {item.label}
+        </a>
+      ))}
+      <div class="h-4 w-px bg-zinc-200 dark:bg-zinc-800 mx-1"></div>
+      <ThemeToggle />
+    </nav>
+
+    <!-- Mobile Nav Controls -->
+    <div class="flex items-center gap-1 sm:hidden">
+      <ThemeToggle />
+      <button
+        type="button"
+        id="mobile-menu-btn"
+        class="p-2 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 rounded-md focus:outline-none"
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
+      >
+        <svg id="menu-icon-bars" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+        </svg>
+        <svg id="menu-icon-close" class="w-5 h-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Dropdown -->
+  <div id="mobile-menu" class="hidden sm:hidden border-t border-zinc-200/80 dark:border-zinc-800/80 px-4 py-3 bg-[#fbfbfd] dark:bg-[#0b0d11]">
+    <div class="flex flex-col space-y-1">
+      <a
+        href="/"
+        class:list={[
+          "px-3 py-2 text-sm rounded-md transition-colors",
+          currentPath === '/'
+            ? "text-zinc-950 dark:text-zinc-100 font-medium bg-zinc-100 dark:bg-zinc-800/60"
+            : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200"
+        ]}
+      >
+        Home
+      </a>
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class:list={[
+            "px-3 py-2 text-sm rounded-md transition-colors",
+            isActive(item.href)
+              ? "text-zinc-950 dark:text-zinc-100 font-medium bg-zinc-100 dark:bg-zinc-800/60"
+              : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200"
+          ]}
+        >
+          {item.label}
+        </a>
+      ))}
+    </div>
+  </div>
+</header>
+
+<script is:inline>
+  function setupMobileMenu() {
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    const iconBars = document.getElementById('menu-icon-bars');
+    const iconClose = document.getElementById('menu-icon-close');
+
+    if (!btn || !menu || !iconBars || !iconClose) return;
+
+    btn.addEventListener('click', () => {
+      const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!isExpanded));
+      menu.classList.toggle('hidden');
+      iconBars.classList.toggle('hidden');
+      iconClose.classList.toggle('hidden');
+    });
+  }
+
+  setupMobileMenu();
+  document.addEventListener('astro:after-swap', setupMobileMenu);
+</script>

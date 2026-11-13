@@ -1,0 +1,114 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+
+const projects = [
+  {
+    category: 'Systems & Infrastructure',
+    items: [
+      {
+        title: 'PulseDB',
+        description: 'An embedded, append-only time-series storage engine written in Rust for resource-constrained IoT sensors with Gorilla compression.',
+        tech: ['Rust', 'Storage Engine', 'LSM-Tree', 'Zero-Copy'],
+        githubUrl: 'https://github.com',
+        liveUrl: 'https://github.com',
+        featured: true,
+      },
+      {
+        title: 'NetProbe',
+        description: 'A low-overhead eBPF-based packet latency profiler measuring TCP handshake jitter across Linux network interfaces.',
+        tech: ['C', 'eBPF', 'Linux Kernel', 'BCC'],
+        githubUrl: 'https://github.com',
+      },
+      {
+        title: 'Homelab ZFS Provisioner',
+        description: 'Automated Ansible playbooks and Bash automation for ZFS pool health monitoring, scrub scheduling, and encrypted off-site replication.',
+        tech: ['Ansible', 'Bash', 'ZFS', 'Debian'],
+        githubUrl: 'https://github.com',
+      },
+    ],
+  },
+  {
+    category: 'Developer Tooling & CLI',
+    items: [
+      {
+        title: 'KubeWatch Lite',
+        description: 'A lightweight Go CLI daemon monitoring Kubernetes pod lifecycle events and dispatching structured alerts to webhook targets.',
+        tech: ['Go', 'Kubernetes Client-Go', 'CLI'],
+        githubUrl: 'https://github.com',
+        featured: true,
+      },
+      {
+        title: 'Git-Trace',
+        description: 'A developer utility to visually inspect git repository commit histories, branch divergence graphs, and dangling reflogs.',
+        tech: ['Rust', 'Git2', 'Ratatui (TUI)'],
+        githubUrl: 'https://github.com',
+        liveUrl: 'https://github.com',
+      },
+      {
+        title: 'FastBench',
+        description: 'Microbenchmarking framework for evaluating HTTP server throughput and latency percentiles with realistic concurrency profiles.',
+        tech: ['TypeScript', 'Node.js', 'Stats'],
+        githubUrl: 'https://github.com',
+      },
+    ],
+  },
+  {
+    category: 'Web Applications & Experiments',
+    items: [
+      {
+        title: 'Mando Blog',
+        description: 'This minimalist, editorial personal developer blog built with Astro, TypeScript, Shiki, and Tailwind CSS.',
+        tech: ['Astro', 'TypeScript', 'Tailwind CSS', 'SSG'],
+        githubUrl: 'https://github.com',
+        liveUrl: 'https://mando.dev',
+        featured: true,
+      },
+      {
+        title: 'DNS Beacon',
+        description: 'A global DNS resolution checker comparing DNS-over-HTTPS (DoH) propagation latencies across 15+ edge locations.',
+        tech: ['TypeScript', 'Cloudflare Workers', 'DoH'],
+        githubUrl: 'https://github.com',
+        liveUrl: 'https://github.com',
+      },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Projects"
+  description="Open source projects, developer tooling, and systems software built by Mando."
+>
+  <div class="space-y-12">
+    <!-- Header -->
+    <header class="space-y-3 pb-8 border-b border-zinc-200/80 dark:border-zinc-800/80">
+      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-zinc-950 dark:text-zinc-50">
+        Projects
+      </h1>
+      <p class="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl leading-relaxed">
+        A selection of open-source tools, system software experiments, and developer utilities I have designed and engineered over the years.
+      </p>
+    </header>
+
+    <!-- Project Sections by Category -->
+    <div class="space-y-12">
+      {projects.map((section) => (
+        <section class="space-y-5">
+          <div class="flex items-center gap-3">
+            <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+              {section.category}
+            </h2>
+            <div class="h-px flex-1 bg-zinc-200 dark:bg-zinc-800"></div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {section.items.map((item) => (
+              <ProjectCard {...item} />
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

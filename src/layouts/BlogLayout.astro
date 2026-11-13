@@ -1,0 +1,159 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import TagBadge from '../components/TagBadge.astro';
+import TableOfContents from '../components/TableOfContents.astro';
+import { formatDate, type BlogPost } from '../utils/posts';
+import { getReadingTime } from '../utils/readingTime';
+
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface Props {
+  post: BlogPost;
+  headings?: Heading[];
+  prevPost?: BlogPost;
+  nextPost?: BlogPost;
+}
+
+const { post, headings = [], prevPost, nextPost } = Astro.props;
+const readingTime = getReadingTime(post.body || '');
+---
+
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+  articleDate={post.data.pubDate}
+  type="article"
+>
+  <article class="max-w-[720px] mx-auto">
+    <!-- Back button -->
+    <div class="mb-8">
+      <a
+        href="/blog"
+        class="inline-flex items-center gap-1.5 text-xs font-mono text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors"
+      >
+        <span>&larr;</span>
+        <span>Back to all articles</span>
+      </a>
+    </div>
+
+    <!-- Article Header -->
+    <header class="mb-10 pb-8 border-b border-zinc-200/80 dark:border-zinc-800/80">
+      <!-- Metadata Row -->
+      <div class="flex flex-wrap items-center gap-2 text-xs font-mono text-zinc-500 dark:text-zinc-400 mb-4">
+        <time datetime={post.data.pubDate.toISOString()}>
+          {formatDate(post.data.pubDate)}
+        </time>
+        <span>&middot;</span>
+        <span>{readingTime}</span>
+        {post.data.category && (
+          <>
+            <span>&middot;</span>
+            <span class="px-2 py-0.5 rounded text-[11px] font-medium bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">
+              {post.data.category}
+            </span>
+          </>
+        )}
+      </div>
+
+      <!-- Main Title -->
+      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-zinc-950 dark:text-zinc-50 mb-4 leading-tight">
+        {post.data.title}
+      </h1>
+
+      <!-- Description / Subtitle -->
+      <p class="text-base sm:text-lg text-zinc-600 dark:text-zinc-300 font-serif leading-relaxed">
+        {post.data.description}
+      </p>
+
+      <!-- Tags row & updated date -->
+      <div class="mt-6 flex flex-wrap items-center justify-between gap-3">
+        {post.data.tags && post.data.tags.length > 0 && (
+          <div class="flex flex-wrap gap-1.5">
+            {post.data.tags.map((tag) => (
+              <TagBadge tag={tag} />
+            ))}
+          </div>
+        )}
+
+        {post.data.updatedDate && (
+          <div class="text-[11px] font-mono text-zinc-400 dark:text-zinc-500">
+            Updated: {formatDate(post.data.updatedDate)}
+          </div>
+        )}
+      </div>
+
+      <!-- Optional Cover Image -->
+      {post.data.coverImage && (
+        <div class="mt-8 overflow-hidden rounded-xl border border-zinc-200/80 dark:border-zinc-800/80">
+          <img
+            src={post.data.coverImage}
+            alt={post.data.title}
+            class="w-full h-auto object-cover max-h-[400px]"
+            loading="lazy"
+          />
+        </div>
+      )}
+    </header>
+
+    <!-- Table of Contents (if article has multiple headings) -->
+    {headings && headings.length > 0 && (
+      <TableOfContents headings={headings} />
+    )}
+
+    <!-- Article Content -->
+    <div class="article-prose">
+      <slot />
+    </div>
+
+    <!-- Article Footer / Navigation -->
+    <footer class="mt-16 pt-8 border-t border-zinc-200/80 dark:border-zinc-800/80">
+      <!-- Prev / Next Navigation -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {prevPost ? (
+          <a
+            href={`/blog/${prevPost.id}`}
+            class="group p-4 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80 bg-zinc-50/50 dark:bg-zinc-900/30 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all flex flex-col"
+          >
+            <span class="text-xs font-mono text-zinc-500 dark:text-zinc-400 mb-1 flex items-center gap-1">
+              &larr; Older article
+            </span>
+            <span class="text-sm font-medium text-zinc-900 dark:text-zinc-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-1">
+              {prevPost.data.title}
+            </span>
+          </a>
+        ) : (
+          <div class="hidden sm:block" />
+        )}
+
+        {nextPost ? (
+          <a
+            href={`/blog/${nextPost.id}`}
+            class="group p-4 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80 bg-zinc-50/50 dark:bg-zinc-900/30 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all flex flex-col items-start sm:items-end text-left sm:text-right"
+          >
+            <span class="text-xs font-mono text-zinc-500 dark:text-zinc-400 mb-1 flex items-center gap-1">
+              Newer article &rarr;
+            </span>
+            <span class="text-sm font-medium text-zinc-900 dark:text-zinc-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-1">
+              {nextPost.data.title}
+            </span>
+          </a>
+        ) : (
+          <div class="hidden sm:block" />
+        )}
+      </div>
+
+      <div class="mt-8 text-center">
+        <a
+          href="/blog"
+          class="text-xs font-mono text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors"
+        >
+          &uarr; Back to all articles
+        </a>
+      </div>
+    </footer>
+  </article>
+</BaseLayout>
