@@ -38,7 +38,7 @@ const readingTime = getReadingTime(post.body || '');
   <!-- Reading Progress Bar -->
   <ReadingProgress />
 
-  <article class="max-w-[720px] mx-auto">
+  <article class="max-w-[680px] mx-auto">
     <!-- Back button -->
     <div class="mb-8">
       <a
@@ -69,13 +69,13 @@ const readingTime = getReadingTime(post.body || '');
         )}
       </div>
 
-      <!-- Main Title -->
-      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-[#231f1c] dark:text-[#f3ede4] mb-4 leading-tight">
+      <!-- Main Title (Literary Serif) -->
+      <h1 class="font-serif text-3xl sm:text-4xl md:text-[2.65rem] font-bold tracking-tight text-[#231f1c] dark:text-[#f3ede4] mb-4 leading-[1.2]">
         {post.data.title}
       </h1>
 
       <!-- Description / Subtitle -->
-      <p class="text-base sm:text-lg text-[#5a5249] dark:text-[#b8b0a4] font-serif leading-relaxed">
+      <p class="text-lg sm:text-xl text-[#635b52] dark:text-[#aba194] font-serif italic leading-relaxed">
         {post.data.description}
       </p>
 
