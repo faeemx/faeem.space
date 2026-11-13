@@ -15,7 +15,7 @@ interface Props {
 }
 
 const {
-  title = 'Mando — Personal Notebook & Essays',
+  title = 'Faeem — Personal Notebook & Essays',
   description = 'A quiet personal space on the web for personal essays, thoughts on creative work, simple software, books, and everyday life.',
   image = '/favicon.svg',
   articleDate,
@@ -25,7 +25,7 @@ const {
   tags = [],
 } = Astro.props;
 
-const siteTitle = title.includes('Mando') ? title : `${title} — Mando`;
+const siteTitle = title.includes('Faeem') ? title : `${title} — Faeem`;
 const absoluteImageUrl = new URL(image, Astro.site || Astro.url).href;
 
 // JSON-LD Structured Data
@@ -40,12 +40,12 @@ const jsonLd = type === 'article' && articleDate
       dateModified: (updatedDate || articleDate).toISOString(),
       author: {
         '@type': 'Person',
-        name: 'Mando',
+        name: 'Faeem',
         url: new URL('/about', Astro.site || Astro.url).href,
       },
       publisher: {
         '@type': 'Person',
-        name: 'Mando',
+        name: 'Faeem',
       },
       mainEntityOfPage: {
         '@type': 'WebPage',
@@ -56,12 +56,12 @@ const jsonLd = type === 'article' && articleDate
   : {
       '@context': 'https://schema.org',
       '@type': 'WebSite',
-      name: 'Mando',
+      name: 'Faeem',
       url: (Astro.site || Astro.url).toString(),
       description: description,
       author: {
         '@type': 'Person',
-        name: 'Mando',
+        name: 'Faeem',
         url: new URL('/about', Astro.site || Astro.url).href,
       },
     };
@@ -89,7 +89,7 @@ const jsonLd = type === 'article' && articleDate
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={siteTitle} />
     <meta property="og:description" content={description} />
-    <meta property="og:site_name" content="Mando" />
+    <meta property="og:site_name" content="Faeem" />
     <meta property="og:image" content={absoluteImageUrl} />
     {articleDate && (
       <meta property="article:published_time" content={articleDate.toISOString()} />
@@ -117,7 +117,7 @@ const jsonLd = type === 'article' && articleDate
     />
 
     <!-- RSS Auto-discovery -->
-    <link rel="alternate" type="application/rss+xml" title="Mando RSS Feed" href="/rss.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Faeem RSS Feed" href="/rss.xml" />
     <!-- Sitemap Link -->
     <link rel="sitemap" href="/sitemap-index.xml" />
 

@@ -6,9 +6,9 @@ export async function GET(context: APIContext) {
   const posts = await getPublishedPosts();
 
   return rss({
-    title: 'Mando — Personal Notebook & Essays',
-    description: 'Personal essays, reflections on slow creative work, books, and everyday life by Mando.',
-    site: context.site?.toString() || 'https://mando.dev',
+    title: 'Faeem — Personal Notebook & Essays',
+    description: 'Personal essays, reflections on slow creative work, books, and everyday life by Faeem.',
+    site: context.site?.toString() || 'https://faeem.space',
     items: posts.map((post) => ({
       title: post.data.title,
       description: post.data.description,

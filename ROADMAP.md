@@ -1,6 +1,6 @@
-# Project Roadmap: Mando
+# Project Roadmap: faeem.space
 
-Mando is a clean, fast, minimal personal developer blog built with Astro, TypeScript, Tailwind CSS, and Content Collections.
+faeem.space is a clean, fast, minimal personal notebook and blog built with Astro, TypeScript, Tailwind CSS, and Content Collections.
 
 ## Status Summary
 

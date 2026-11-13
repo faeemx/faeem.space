@@ -10,7 +10,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://mando.dev',
+  site: 'https://faeem.space',
   vite: {
     plugins: [tailwindcss()]
   },
