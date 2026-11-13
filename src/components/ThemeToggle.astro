@@ -4,14 +4,13 @@
 
 <button
   type="button"
-  id="theme-toggle"
-  class="relative inline-flex items-center justify-center p-2 rounded-lg text-[#756c63] hover:text-[#231f1c] hover:bg-[#f0e8dc] dark:text-[#968d81] dark:hover:text-[#f3ede4] dark:hover:bg-[#26221d] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#9e471d]"
+  class="theme-toggle-btn relative inline-flex items-center justify-center p-2 rounded-lg text-[#756c63] hover:text-[#231f1c] hover:bg-[#f0e8dc] dark:text-[#968d81] dark:hover:text-[#f3ede4] dark:hover:bg-[#26221d] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#9e471d] cursor-pointer"
   aria-label="Toggle light or dark theme"
+  title="Toggle light or dark theme"
 >
   <!-- Sun icon (shown in dark mode to switch to light) -->
   <svg
-    id="theme-toggle-light-icon"
-    class="w-4 h-4 hidden dark:block text-[#d8cebe]"
+    class="theme-sun-icon w-4 h-4 text-[#d8cebe] pointer-events-none"
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
@@ -26,8 +25,7 @@
 
   <!-- Moon icon (shown in light mode to switch to dark) -->
   <svg
-    id="theme-toggle-dark-icon"
-    class="w-4 h-4 block dark:hidden text-[#554d45] hover:text-[#231f1c]"
+    class="theme-moon-icon w-4 h-4 text-[#554d45] hover:text-[#231f1c] pointer-events-none"
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
@@ -41,25 +39,56 @@
   </svg>
 </button>
 
-<script is:inline>
-  function setupThemeToggle() {
-    const toggleBtn = document.getElementById('theme-toggle');
-    if (!toggleBtn) return;
+<style>
+  /* Explicit display control matching current theme */
+  :global(html.dark) .theme-sun-icon {
+    display: block !important;
+  }
+  :global(html.dark) .theme-moon-icon {
+    display: none !important;
+  }
+  :global(html:not(.dark)) .theme-sun-icon {
+    display: none !important;
+  }
+  :global(html:not(.dark)) .theme-moon-icon {
+    display: block !important;
+  }
+</style>
 
-    toggleBtn.addEventListener('click', () => {
-      const isCurrentlyDark = document.documentElement.classList.contains('dark');
-      if (isCurrentlyDark) {
-        document.documentElement.classList.remove('dark');
-        document.documentElement.classList.add('light');
-        localStorage.setItem('theme', 'light');
+<script is:inline>
+  // Global delegated theme switch handler attached only once
+  if (!window.__themeToggleInitialized) {
+    window.__themeToggleInitialized = true;
+
+    document.addEventListener('click', (event) => {
+      const btn = event.target && event.target.closest ? event.target.closest('.theme-toggle-btn') : null;
+      if (!btn) return;
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      const html = document.documentElement;
+      const willBeDark = !html.classList.contains('dark');
+
+      if (willBeDark) {
+        html.classList.add('dark');
+        html.classList.remove('light');
       } else {
-        document.documentElement.classList.remove('light');
-        document.documentElement.classList.add('dark');
-        localStorage.setItem('theme', 'dark');
+        html.classList.remove('dark');
+        html.classList.add('light');
+      }
+
+      try {
+        localStorage.setItem('theme', willBeDark ? 'dark' : 'light');
+      } catch (err) {
+        console.warn('Unable to access localStorage for theme:', err);
+      }
+
+      // Update theme-color meta tag for mobile browser address bar
+      const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+      if (metaThemeColor) {
+        metaThemeColor.setAttribute('content', willBeDark ? '#171513' : '#fbf8f3');
       }
     });
   }
-
-  setupThemeToggle();
-  document.addEventListener('astro:after-swap', setupThemeToggle);
 </script>
