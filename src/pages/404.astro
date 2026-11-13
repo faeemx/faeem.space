@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Page Not Found" description="The page you were looking for does not exist.">
+  <div class="py-16 sm:py-24 text-center space-y-6 max-w-md mx-auto">
+    <div class="text-xs font-mono tracking-widest uppercase text-[#9e471d] dark:text-[#e57e4b]">
+      404 — Not Found
+    </div>
+    
+    <h1 class="text-3xl sm:text-4xl font-serif font-bold tracking-tight text-[#231f1c] dark:text-[#f3ede4]">
+      Lost in the quiet.
+    </h1>
+
+    <p class="text-base text-[#635b52] dark:text-[#aba194] font-serif leading-relaxed">
+      The essay or page you were looking for has moved, or perhaps it was only a fleeting thought.
+    </p>
+
+    <div class="pt-4">
+      <a
+        href="/"
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium bg-[#f0e8dc] text-[#231f1c] hover:bg-[#e8decb] dark:bg-[#26221d] dark:text-[#f3ede4] dark:hover:bg-[#322c26] transition-colors"
+      >
+        &larr; Return to Homepage
+      </a>
+    </div>
+  </div>
+</BaseLayout>
