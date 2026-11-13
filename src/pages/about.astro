@@ -4,65 +4,68 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <BaseLayout
   title="About"
-  description="Background, engineering philosophy, and personal story of Mando."
+  description="Personal notes, philosophy on slow creative work, and how I spend my days."
 >
   <div class="max-w-[720px] mx-auto space-y-12">
     <!-- Header -->
-    <header class="space-y-3 pb-8 border-b border-zinc-200/80 dark:border-zinc-800/80">
-      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-zinc-950 dark:text-zinc-50">
+    <header class="space-y-3 pb-8 border-b border-stone-200/80 dark:border-stone-800/80">
+      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-stone-950 dark:text-stone-50">
         About Me
       </h1>
-      <p class="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 font-serif leading-relaxed">
-        I am a software engineer focused on building robust, performant software systems that solve real problems with minimal accidental complexity.
+      <p class="text-base sm:text-lg text-stone-600 dark:text-stone-400 font-serif leading-relaxed">
+        I am a writer, programmer, and everyday tinkerer. I spend my days building small, gentle software and thinking about how to live well in an increasingly hurried world.
       </p>
     </header>
 
     <!-- Bio Sections with Editorial Typography -->
     <section class="article-prose space-y-6">
-      <h2>Background</h2>
+      <h2>A Quiet Corner of the Web</h2>
       <p>
-        I have spent over a decade working across the technology stack, from bare-metal Linux kernels and network daemons to high-throughput distributed microservices and modern frontend architectures.
+        I started this website because I missed the early, personal web—a time before feeds were dominated by engagement algorithms, outrage farming, and monetized influencer personas.
       </p>
       <p>
-        My core interest lies at the intersection of <strong>systems programming</strong>, <strong>data storage architectures</strong>, and <strong>developer ergonomics</strong>. I believe that understanding the underlying operating system, disk I/O characteristics, and network protocols makes one an exponentially better software engineer.
+        This site is my digital garden. It is a place where I can publish complete thoughts, post photographs taken on weekend walks, share notes on books that moved me, and document tools I built simply because I wanted them to exist.
       </p>
 
-      <h2>Engineering Philosophy</h2>
+      <h2>A Few Things That Bring Me Joy</h2>
+      <ul>
+        <li><strong>Early morning silence:</strong> Making a hot cup of sencha or pour-over coffee before the world wakes up.</li>
+        <li><strong>Second-hand bookstores:</strong> Spending an hour browsing dusty shelves for forgotten editions with hand-written inscriptions.</li>
+        <li><strong>Unscheduled walks:</strong> Leaving my phone on the desk and wandering through residential neighborhoods and parks.</li>
+        <li><strong>Small, local software:</strong> Writing little scripts and tools that run entirely on my machine without accounts or subscriptions.</li>
+        <li><strong>Fountain pens & paper:</strong> The physical feedback of ink meeting cream-colored paper in a traveler's notebook.</li>
+      </ul>
+
+      <h2>Guiding Values</h2>
       <p>
-        Over the years, shipping code to production has instilled a few guiding principles that inform every line of code I write:
+        Whether I am writing an essay or writing software, I try to hold on to a few simple principles:
       </p>
       <ul>
         <li>
-          <strong>Simplicity over cleverness:</strong> Code is read and debugged far more often than it is written. Boring, straightforward implementations with clear boundaries win over convoluted metaprogramming.
+          <strong>Slowness is a virtue:</strong> Good things take time to ferment. It is better to write one thoughtful essay a month than to publish thirty hasty reactions to the daily news cycle.
         </li>
         <li>
-          <strong>Observability is not an afterthought:</strong> If you cannot inspect the internal state of a running service using structured logs and clear metrics, you are running blind.
+          <strong>Own your tools:</strong> Choose plain text, local files, and durable formats that will still be accessible twenty years from now.
         </li>
         <li>
-          <strong>Respect the machine:</strong> Compute resources are finite. Writing efficient algorithms, avoiding memory bloat, and respecting cache hierarchies is good craftsmanship.
-        </li>
-        <li>
-          <strong>Minimal dependencies:</strong> Every third-party library is a liability in security, maintenance, and upgrade velocity. Vendor deliberately.
+          <strong>Resist the urge to scale:</strong> Not everything needs to be a business, a brand, or an audience of thousands. Doing something with deep care for a handful of people is deeply fulfilling.
         </li>
       </ul>
 
-      <h2>What I'm Currently Exploring</h2>
+      <h2>Currently</h2>
       <p>
-        These days, I spend my spare time experimenting with:
+        Lately, I have been:
       </p>
       <ul>
-        <li>Building high-performance storage engines and log-structured merge trees in Rust.</li>
-        <li>Hardening my local homelab infrastructure with Debian, ZFS, WireGuard, and Docker.</li>
-        <li>Static site generation and edge compute workflows using Astro and Cloudflare.</li>
-        <li>Exploring distributed consensus protocols (Raft, Paxos) and write-ahead log designs.</li>
+        <li>Reading essays by Wendell Berry and Ursula K. Le Guin.</li>
+        <li>Experimenting with 35mm black-and-white film photography.</li>
+        <li>Learning how to bake sourdough bread with an active starter.</li>
+        <li>Writing reflections on slow technology and creative independence.</li>
       </ul>
 
-      <h2>Get in Touch</h2>
+      <h2>Say Hello</h2>
       <p>
-        I enjoy conversing with fellow engineers, exchanging notes on homelabs, and discussing distributed systems challenges.
-      </p>
-      <p>
-        You can find my code on <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a>, follow my thoughts on <a href="https://x.com" target="_blank" rel="noopener noreferrer">Twitter / X</a>, or reach out directly via email at <code class="font-mono text-xs">mando [at] mando.dev</code>.
+        I love receiving thoughtful messages from other humans. If something I wrote resonated with you, or if you just want to say hi, send a note to <code class="font-mono text-xs">mando [at] mando.dev</code>. I read and reply to every message.
       </p>
     </section>
   </div>

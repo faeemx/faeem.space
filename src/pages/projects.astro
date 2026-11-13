@@ -4,72 +4,54 @@ import ProjectCard from '../components/ProjectCard.astro';
 
 const projects = [
   {
-    category: 'Systems & Infrastructure',
+    category: 'Small Software & Tools',
     items: [
       {
-        title: 'PulseDB',
-        description: 'An embedded, append-only time-series storage engine written in Rust for resource-constrained IoT sensors with Gorilla compression.',
-        tech: ['Rust', 'Storage Engine', 'LSM-Tree', 'Zero-Copy'],
+        title: 'Ponder',
+        description: 'A quiet morning reflection journal that prompts you with a single thoughtful question each day. Stores entries as local Markdown files without accounts or telemetry.',
+        tech: ['Local-First', 'Writing', 'Markdown', 'Calm'],
         githubUrl: 'https://github.com',
         liveUrl: 'https://github.com',
         featured: true,
       },
       {
-        title: 'NetProbe',
-        description: 'A low-overhead eBPF-based packet latency profiler measuring TCP handshake jitter across Linux network interfaces.',
-        tech: ['C', 'eBPF', 'Linux Kernel', 'BCC'],
+        title: 'Teatime',
+        description: 'A minimal, distraction-free desktop steep timer with gentle chime audio designed for brewing loose-leaf tea with intention.',
+        tech: ['Audio', 'Tea Brewing', 'Minimalist'],
         githubUrl: 'https://github.com',
-      },
-      {
-        title: 'Homelab ZFS Provisioner',
-        description: 'Automated Ansible playbooks and Bash automation for ZFS pool health monitoring, scrub scheduling, and encrypted off-site replication.',
-        tech: ['Ansible', 'Bash', 'ZFS', 'Debian'],
-        githubUrl: 'https://github.com',
-      },
-    ],
-  },
-  {
-    category: 'Developer Tooling & CLI',
-    items: [
-      {
-        title: 'KubeWatch Lite',
-        description: 'A lightweight Go CLI daemon monitoring Kubernetes pod lifecycle events and dispatching structured alerts to webhook targets.',
-        tech: ['Go', 'Kubernetes Client-Go', 'CLI'],
-        githubUrl: 'https://github.com',
+        liveUrl: 'https://github.com',
         featured: true,
       },
       {
-        title: 'Git-Trace',
-        description: 'A developer utility to visually inspect git repository commit histories, branch divergence graphs, and dangling reflogs.',
-        tech: ['Rust', 'Git2', 'Ratatui (TUI)'],
-        githubUrl: 'https://github.com',
-        liveUrl: 'https://github.com',
-      },
-      {
-        title: 'FastBench',
-        description: 'Microbenchmarking framework for evaluating HTTP server throughput and latency percentiles with realistic concurrency profiles.',
-        tech: ['TypeScript', 'Node.js', 'Stats'],
+        title: 'Commonplace',
+        description: 'A personal digital slip-box for capturing memorable book quotes, essay passages, and fleeting thoughts discovered during reading.',
+        tech: ['Reading', 'Personal Wiki', 'Notes'],
         githubUrl: 'https://github.com',
       },
     ],
   },
   {
-    category: 'Web Applications & Experiments',
+    category: 'Creative Experiments & Publishing',
     items: [
       {
-        title: 'Mando Blog',
-        description: 'This minimalist, editorial personal developer blog built with Astro, TypeScript, Shiki, and Tailwind CSS.',
-        tech: ['Astro', 'TypeScript', 'Tailwind CSS', 'SSG'],
+        title: 'Mando Notebook',
+        description: 'This website—a fast, typography-centered personal publishing space built without ads, tracking, or unnecessary scripts.',
+        tech: ['Astro', 'Editorial', 'SSG', 'Reading'],
         githubUrl: 'https://github.com',
         liveUrl: 'https://mando.dev',
         featured: true,
       },
       {
-        title: 'DNS Beacon',
-        description: 'A global DNS resolution checker comparing DNS-over-HTTPS (DoH) propagation latencies across 15+ edge locations.',
-        tech: ['TypeScript', 'Cloudflare Workers', 'DoH'],
+        title: 'Folio (Film Journal)',
+        description: 'An offline-first photo gallery generator built to catalog 35mm film scans, camera settings, and handwritten field notes.',
+        tech: ['Photography', 'Film Scans', 'Gallery'],
         githubUrl: 'https://github.com',
-        liveUrl: 'https://github.com',
+      },
+      {
+        title: 'Letterbox',
+        description: 'A little CLI utility that turns email newsletters into a calm, static RSS feed so I can read longform writing on my own terms.',
+        tech: ['RSS', 'Email Archive', 'Quiet Web'],
+        githubUrl: 'https://github.com',
       },
     ],
   },
@@ -78,16 +60,16 @@ const projects = [
 
 <BaseLayout
   title="Projects"
-  description="Open source projects, developer tooling, and systems software built by Mando."
+  description="Personal software, quiet tools, and creative experiments built by Mando."
 >
   <div class="space-y-12">
     <!-- Header -->
-    <header class="space-y-3 pb-8 border-b border-zinc-200/80 dark:border-zinc-800/80">
-      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-zinc-950 dark:text-zinc-50">
-        Projects
+    <header class="space-y-3 pb-8 border-b border-stone-200/80 dark:border-stone-800/80">
+      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-stone-950 dark:text-stone-50">
+        Projects & Tools
       </h1>
-      <p class="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl leading-relaxed">
-        A selection of open-source tools, system software experiments, and developer utilities I have designed and engineered over the years.
+      <p class="text-base sm:text-lg text-stone-600 dark:text-stone-400 max-w-2xl font-serif leading-relaxed">
+        A collection of small tools, quiet applications, and digital experiments built for an audience of one and shared freely with anyone who might find them useful.
       </p>
     </header>
 
@@ -96,10 +78,10 @@ const projects = [
       {projects.map((section) => (
         <section class="space-y-5">
           <div class="flex items-center gap-3">
-            <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+            <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-stone-900 dark:text-stone-100">
               {section.category}
             </h2>
-            <div class="h-px flex-1 bg-zinc-200 dark:bg-zinc-800"></div>
+            <div class="h-px flex-1 bg-stone-200 dark:bg-stone-800"></div>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">

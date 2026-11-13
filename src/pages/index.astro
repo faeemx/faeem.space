@@ -7,20 +7,20 @@ import { getPublishedPosts } from '../utils/posts';
 const allPosts = await getPublishedPosts();
 const recentPosts = allPosts.slice(0, 3);
 
-// Curated featured projects for the homepage
+// Curated personal projects
 const featuredProjects = [
   {
-    title: 'PulseDB',
-    description: 'An embedded, append-only time-series storage engine written in Rust for resource-constrained IoT sensors.',
-    tech: ['Rust', 'Storage Engine', 'LSM-Tree'],
+    title: 'Ponder',
+    description: 'A quiet morning journal that prompts you with a single, thoughtful question each day. Offline-first, local Markdown storage, zero metrics.',
+    tech: ['Local-First', 'Markdown', 'Writing'],
     githubUrl: 'https://github.com',
     liveUrl: 'https://github.com',
     featured: true,
   },
   {
-    title: 'KubeWatch Lite',
-    description: 'A minimal CLI daemon that monitors Kubernetes pod lifecycle events and streams structured alerts to Discord and Slack webhooks.',
-    tech: ['Go', 'Kubernetes API', 'CLI'],
+    title: 'Teatime',
+    description: 'A tiny, distraction-free desktop steep timer for whole-leaf tea lovers. Gentle chime audio, no accounts, no subscriptions.',
+    tech: ['Web Audio', 'Minimalist', 'Craft'],
     githubUrl: 'https://github.com',
     featured: true,
   },
@@ -31,62 +31,61 @@ const featuredProjects = [
   <div class="space-y-16 sm:space-y-20">
     <!-- Hero / Personal Introduction -->
     <section class="space-y-6 pt-4">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono border border-emerald-500/20 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
-        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-        <span>Available for technical advisory & open source</span>
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono border border-amber-600/20 bg-amber-500/10 text-amber-800 dark:text-amber-300">
+        <span class="w-1.5 h-1.5 rounded-full bg-amber-600 dark:bg-amber-400"></span>
+        <span>Writing & thinking quietly</span>
       </div>
 
       <div class="space-y-4">
-        <h1 class="text-3xl sm:text-5xl font-bold tracking-tight text-zinc-950 dark:text-zinc-50 leading-tight">
+        <h1 class="text-3xl sm:text-5xl font-bold tracking-tight text-stone-950 dark:text-stone-50 leading-tight">
           Hi, I'm Mando. <br />
-          <span class="text-zinc-500 dark:text-zinc-400 font-normal">
-            Software engineer, systems enthusiast, and builder.
+          <span class="text-stone-500 dark:text-stone-400 font-normal">
+            Writer, creator, and curious observer.
           </span>
         </h1>
-        <p class="text-base sm:text-lg text-zinc-600 dark:text-zinc-300 leading-relaxed max-w-2xl font-serif">
-          Welcome to my personal corner of the internet. This website is a repository of technical writing, software experiments, systems architecture notes, and lessons learned from shipping code to production.
+        <p class="text-base sm:text-lg text-stone-600 dark:text-stone-300 leading-relaxed max-w-2xl font-serif">
+          Welcome to my quiet corner of the internet. This site is a personal notebook where I share longform essays on craft, small self-made tools, books I'm reading, and reflections on living intentionally in an over-connected world.
         </p>
       </div>
 
-      <!-- Quick Links / Status -->
-      <div class="flex flex-wrap items-center gap-4 text-xs font-mono text-zinc-500 dark:text-zinc-400 pt-2">
+      <!-- Quick Links / Details -->
+      <div class="flex flex-wrap items-center gap-4 text-xs font-mono text-stone-500 dark:text-stone-400 pt-2">
         <div class="flex items-center gap-1.5">
-          <svg class="w-4 h-4 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          <svg class="w-4 h-4 text-stone-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
           </svg>
-          <span>Remote / Earth</span>
+          <span>Reading, walking, brewing tea</span>
         </div>
         <span>&middot;</span>
         <div class="flex items-center gap-1.5">
-          <svg class="w-4 h-4 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+          <svg class="w-4 h-4 text-stone-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
           </svg>
-          <span>Go, Rust, TypeScript, Linux</span>
+          <span>Essays, notes & small tools</span>
         </div>
         <span>&middot;</span>
-        <a href="/about" class="underline hover:text-zinc-900 dark:hover:text-zinc-200">
+        <a href="/about" class="underline hover:text-stone-900 dark:hover:text-stone-200">
           More about me &rarr;
         </a>
       </div>
     </section>
 
-    <!-- Recent Articles Section -->
+    <!-- Recent Essays Section -->
     <section class="space-y-6">
-      <div class="flex items-baseline justify-between border-b border-zinc-200/80 dark:border-zinc-800/80 pb-4">
+      <div class="flex items-baseline justify-between border-b border-stone-200/80 dark:border-stone-800/80 pb-4">
         <div>
-          <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-zinc-950 dark:text-zinc-50">
-            Recent Writing
+          <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-stone-950 dark:text-stone-50">
+            Recent Essays
           </h2>
-          <p class="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 mt-1">
-            Thoughts on distributed systems, Linux, and developer tools.
+          <p class="text-xs sm:text-sm text-stone-500 dark:text-stone-400 mt-1">
+            Reflections on creative work, quiet computing, and everyday life.
           </p>
         </div>
         <a
           href="/blog"
-          class="text-xs font-mono text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors inline-flex items-center gap-1"
+          class="text-xs font-mono text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200 transition-colors inline-flex items-center gap-1"
         >
-          <span>All articles</span>
+          <span>All essays</span>
           <span>&rarr;</span>
         </a>
       </div>
@@ -97,25 +96,25 @@ const featuredProjects = [
             <PostCard post={post} />
           ))
         ) : (
-          <p class="text-sm text-zinc-500">No articles published yet.</p>
+          <p class="text-sm text-stone-500">No essays published yet.</p>
         )}
       </div>
     </section>
 
-    <!-- Selected Projects Section -->
+    <!-- Selected Creations Section -->
     <section class="space-y-6">
-      <div class="flex items-baseline justify-between border-b border-zinc-200/80 dark:border-zinc-800/80 pb-4">
+      <div class="flex items-baseline justify-between border-b border-stone-200/80 dark:border-stone-800/80 pb-4">
         <div>
-          <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-zinc-950 dark:text-zinc-50">
-            Selected Projects
+          <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-stone-950 dark:text-stone-50">
+            Small Creations
           </h2>
-          <p class="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 mt-1">
-            Open-source utilities and system tools I have engineered.
+          <p class="text-xs sm:text-sm text-stone-500 dark:text-stone-400 mt-1">
+            Personal tools and gentle software experiments built for daily use.
           </p>
         </div>
         <a
           href="/projects"
-          class="text-xs font-mono text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors inline-flex items-center gap-1"
+          class="text-xs font-mono text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200 transition-colors inline-flex items-center gap-1"
         >
           <span>All projects</span>
           <span>&rarr;</span>

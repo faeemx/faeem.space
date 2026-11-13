@@ -18,14 +18,14 @@ const filtered = headings.filter((h) => h.depth === 2 || h.depth === 3);
 {filtered.length > 1 && (
   <nav
     id="article-toc"
-    class="my-8 p-5 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80 bg-zinc-50/60 dark:bg-zinc-900/30 transition-colors"
+    class="my-8 p-5 rounded-xl border border-stone-200/80 dark:border-stone-800/80 bg-stone-100/60 dark:bg-stone-900/30 transition-colors"
     aria-label="Table of contents"
   >
     <div class="flex items-center justify-between mb-3">
-      <span class="text-xs font-mono font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
-        On this page
+      <span class="text-xs font-mono font-semibold uppercase tracking-wider text-stone-500 dark:text-stone-400">
+        In this essay
       </span>
-      <span class="text-[11px] font-mono text-zinc-400 dark:text-zinc-500">
+      <span class="text-[11px] font-mono text-stone-400 dark:text-stone-500">
         {filtered.length} sections
       </span>
     </div>
@@ -38,7 +38,7 @@ const filtered = headings.filter((h) => h.depth === 2 || h.depth === 3);
             <a
               href={`#${heading.slug}`}
               data-slug={heading.slug}
-              class="toc-link block py-0.5 text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-zinc-100 transition-colors border-l-2 border-transparent pl-2.5 -ml-2.5"
+              class="toc-link block py-0.5 text-stone-600 dark:text-stone-400 hover:text-stone-950 dark:hover:text-stone-100 transition-colors border-l-2 border-transparent pl-2.5 -ml-2.5"
             >
               {cleanText}
             </a>
@@ -71,20 +71,20 @@ const filtered = headings.filter((h) => h.depth === 2 || h.depth === 3);
             tocLinks.forEach((link) => {
               if (link.getAttribute('data-slug') === id) {
                 link.classList.add(
-                  'text-zinc-950',
-                  'dark:text-zinc-100',
+                  'text-stone-950',
+                  'dark:text-stone-100',
                   'font-medium',
-                  'border-zinc-900',
-                  'dark:border-zinc-200'
+                  'border-stone-900',
+                  'dark:border-stone-200'
                 );
                 link.classList.remove('border-transparent');
               } else {
                 link.classList.remove(
-                  'text-zinc-950',
-                  'dark:text-zinc-100',
+                  'text-stone-950',
+                  'dark:text-stone-100',
                   'font-medium',
-                  'border-zinc-900',
-                  'dark:border-zinc-200'
+                  'border-stone-900',
+                  'dark:border-stone-200'
                 );
                 link.classList.add('border-transparent');
               }

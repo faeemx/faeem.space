@@ -5,13 +5,13 @@
 <button
   type="button"
   id="theme-toggle"
-  class="relative inline-flex items-center justify-center p-2 rounded-lg text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/60 dark:hover:bg-zinc-800/80 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400"
-  aria-label="Toggle color theme"
+  class="relative inline-flex items-center justify-center p-2 rounded-lg text-stone-600 hover:text-stone-950 hover:bg-stone-100 dark:text-stone-400 dark:hover:text-stone-100 dark:hover:bg-stone-800/60 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-stone-400"
+  aria-label="Toggle light or dark theme"
 >
-  <!-- Sun icon (shown in dark mode) -->
+  <!-- Sun icon (shown in dark mode to switch to light) -->
   <svg
     id="theme-toggle-light-icon"
-    class="w-4 h-4 hidden dark:block"
+    class="w-4 h-4 hidden dark:block text-stone-300"
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
@@ -24,10 +24,10 @@
     />
   </svg>
 
-  <!-- Moon icon (shown in light mode) -->
+  <!-- Moon icon (shown in light mode to switch to dark) -->
   <svg
     id="theme-toggle-dark-icon"
-    class="w-4 h-4 block dark:hidden text-zinc-700 hover:text-zinc-950"
+    class="w-4 h-4 block dark:hidden text-stone-700 hover:text-stone-950"
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
@@ -47,20 +47,19 @@
     if (!toggleBtn) return;
 
     toggleBtn.addEventListener('click', () => {
-      const isCurrentlyLight = document.documentElement.classList.contains('light');
-      if (isCurrentlyLight) {
-        document.documentElement.classList.remove('light');
-        document.documentElement.classList.add('dark');
-        localStorage.setItem('theme', 'dark');
-      } else {
+      const isCurrentlyDark = document.documentElement.classList.contains('dark');
+      if (isCurrentlyDark) {
         document.documentElement.classList.remove('dark');
         document.documentElement.classList.add('light');
         localStorage.setItem('theme', 'light');
+      } else {
+        document.documentElement.classList.remove('light');
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
       }
     });
   }
 
-  // Run on initial load and after Astro page swaps if view transitions are used
   setupThemeToggle();
   document.addEventListener('astro:after-swap', setupThemeToggle);
 </script>

@@ -15,8 +15,8 @@ interface Props {
 }
 
 const {
-  title = 'Mando — Personal Developer Blog',
-  description = 'A clean, typography-focused personal developer blog documenting systems engineering, software craftsmanship, and technology experiments.',
+  title = 'Mando — Personal Notebook & Essays',
+  description = 'A quiet personal space on the web for personal essays, thoughts on creative work, simple software, books, and everyday life.',
   image = '/favicon.svg',
   articleDate,
   updatedDate,
@@ -68,7 +68,7 @@ const jsonLd = type === 'article' && articleDate
 ---
 
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -82,7 +82,7 @@ const jsonLd = type === 'article' && articleDate
     <title>{siteTitle}</title>
     <meta name="title" content={siteTitle} />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#0b0d11" />
+    <meta name="theme-color" content="#fafaf9" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content={type} />
@@ -108,7 +108,7 @@ const jsonLd = type === 'article' && articleDate
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
-    <!-- Preconnect to Google Fonts for Inter, Literata, and JetBrains Mono -->
+    <!-- Google Fonts for Inter, Literata, and JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -121,20 +121,21 @@ const jsonLd = type === 'article' && articleDate
     <!-- Sitemap Link -->
     <link rel="sitemap" href="/sitemap-index.xml" />
 
-    <!-- Inline script to apply dark/light theme instantly without flash -->
+    <!-- Default Light mode inline script -->
     <script is:inline>
       (function () {
         try {
           const stored = localStorage.getItem('theme');
-          if (stored === 'light') {
-            document.documentElement.classList.add('light');
-            document.documentElement.classList.remove('dark');
-          } else {
+          if (stored === 'dark') {
             document.documentElement.classList.add('dark');
             document.documentElement.classList.remove('light');
+          } else {
+            // Light mode by default
+            document.documentElement.classList.add('light');
+            document.documentElement.classList.remove('dark');
           }
         } catch (e) {
-          document.documentElement.classList.add('dark');
+          document.documentElement.classList.add('light');
         }
       })();
     </script>

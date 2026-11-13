@@ -34,39 +34,39 @@ const { tag, posts, allTags } = Astro.props;
 ---
 
 <BaseLayout
-  title={`Articles tagged #${tag}`}
-  description={`Browse all articles tagged with #${tag} by Mando.`}
+  title={`Writings tagged #${tag}`}
+  description={`Browse all essays tagged with #${tag} by Mando.`}
 >
   <div class="space-y-10">
     <!-- Back to blog -->
     <div>
       <a
         href="/blog"
-        class="inline-flex items-center gap-1.5 text-xs font-mono text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors"
+        class="inline-flex items-center gap-1.5 text-xs font-mono text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-200 transition-colors"
       >
         <span>&larr;</span>
-        <span>All articles</span>
+        <span>All essays</span>
       </a>
     </div>
 
     <!-- Page Header -->
     <header class="space-y-3">
       <div class="flex items-center gap-3">
-        <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-zinc-950 dark:text-zinc-50 font-mono">
+        <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-stone-950 dark:text-stone-50 font-mono">
           #{tag}
         </h1>
-        <span class="text-xs font-mono px-2 py-0.5 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">
-          {posts.length} {posts.length === 1 ? 'article' : 'articles'}
+        <span class="text-xs font-mono px-2 py-0.5 rounded-full bg-stone-200/80 dark:bg-stone-800 text-stone-700 dark:text-stone-300">
+          {posts.length} {posts.length === 1 ? 'essay' : 'essays'}
         </span>
       </div>
-      <p class="text-zinc-600 dark:text-zinc-400 text-sm sm:text-base">
-        Showing all published posts categorized under the <code class="text-xs font-mono">#{tag}</code> tag.
+      <p class="text-stone-600 dark:text-stone-400 font-serif text-sm sm:text-base">
+        Showing all writings tagged with <code class="text-xs font-mono">#{tag}</code>.
       </p>
     </header>
 
     <!-- All Tags cloud -->
-    <div class="pt-2 pb-4 border-y border-zinc-200/80 dark:border-zinc-800/80">
-      <div class="text-xs font-mono text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-2.5">
+    <div class="pt-2 pb-4 border-y border-stone-200/80 dark:border-stone-800/80">
+      <div class="text-xs font-mono text-stone-500 dark:text-stone-400 uppercase tracking-wider mb-2.5">
         All Topics
       </div>
       <div class="flex flex-wrap gap-2">

@@ -3,76 +3,82 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 const sections = [
   {
-    title: 'Workstation & Hardware',
-    description: 'Physical machines and peripherals that keep me productive day in and day out.',
+    title: 'Writing & Analog Tools',
+    description: 'Physical objects and tactile materials that help me slow down and think clearly before touching a keyboard.',
     items: [
       {
-        name: 'Apple MacBook Pro 16" (M3 Max, 64GB RAM)',
-        desc: 'My primary workhorse for mobile and day-to-day engineering. The battery efficiency and compile speeds are unmatched.',
+        name: 'Traveler\'s Notebook (Camel Leather)',
+        desc: 'My constant everyday companion. Filled with lightweight blank paper refills for morning journaling, sketching, and stray ideas.',
       },
       {
-        name: 'Dell UltraSharp 32" 4K (U3223QE)',
-        desc: 'Matte IPS panel with excellent color accuracy and built-in USB-C hub with single-cable charging.',
+        name: 'Pilot Custom 823 Fountain Pen (Medium Nib)',
+        desc: 'Inked with Iroshizuku Tsukiyo (Moonlit Night) deep blue ink. It writes with an effortless, wet glide across paper.',
       },
       {
-        name: 'Keychron Q1 Pro (Custom Gateron Oil Kings)',
-        desc: 'Solid aluminum 75% mechanical keyboard with wireless support, customized with lubed linear switches.',
+        name: 'Midori MD Notebooks',
+        desc: 'Japanese bleed-resistant cream paper with minimal thread binding that lays completely flat on the desk.',
       },
       {
-        name: 'Logitech MX Master 3S',
-        desc: 'The horizontal thumb scroll and quiet magnetic switches make code and document navigation effortless.',
-      },
-      {
-        name: 'Sony WH-1000XM5 Headphones',
-        desc: 'Essential for deep focus blocks and blocking ambient background noise in coffee shops and open spaces.',
+        name: 'Kindle Paperwhite (Warm Light Edition)',
+        desc: 'Kept in airplane mode 99% of the time. Used for long essays, travel reading, and late-night book chapters without eye strain.',
       },
     ],
   },
   {
-    title: 'Development Environment & Software',
-    description: 'Tools, editors, and terminal utilities configured for minimal friction.',
+    title: 'Desk & Physical Workspace',
+    description: 'The physical corner where I sit to write, code, and daydream.',
     items: [
       {
-        name: 'Visual Studio Code & Neovim',
-        desc: 'VS Code with custom minimal keybindings for complex projects; Neovim with Lua configs for quick terminal edits and server sessions.',
+        name: 'Solid White Oak Table (160x80cm)',
+        desc: 'Positioned right next to a large east-facing window. Finished with matte natural oil that warms under the palms.',
       },
       {
-        name: 'Ghostty & WezTerm',
-        desc: 'GPU-accelerated modern terminal emulators configured with true color support and seamless font rendering.',
+        name: 'Keychron Q1 Pro Mechanical Keyboard',
+        desc: 'Customized with lubed tactile switches and retro beige PBT keycaps. Typing feels rhythmic and deliberate like an old typewriter.',
       },
       {
-        name: 'JetBrains Mono & Inter',
-        desc: 'JetBrains Mono with ligatures for code; Inter and Literata for prose and editorial reading.',
+        name: 'Herman Miller Mirra 2 Chair',
+        desc: 'Comfortable, breathable support for long sessions of reading, thinking, and drafting.',
       },
       {
-        name: 'Fish Shell + Starship Prompt',
-        desc: 'Snappy autosuggestions, clean tab completions, and an informative yet minimal status prompt.',
-      },
-      {
-        name: 'Git + Delta',
-        desc: 'Git with git-delta for syntax-highlighted, side-by-side terminal diffs and pager navigation.',
+        name: 'Wool Felt Desk Mat (Charcoal)',
+        desc: 'Soft, warm texture under the forearms that dampens keyboard sound and creates a defined writing area.',
       },
     ],
   },
   {
-    title: 'Homelab & Cloud Infrastructure',
-    description: 'Self-hosted computing and edge platforms I rely on for services and deployments.',
+    title: 'Tea & Coffee Rituals',
+    description: 'The hot beverages that bookend my mornings and afternoons.',
     items: [
       {
-        name: 'Custom Mini-PC (Debian 12 Bookworm)',
-        desc: 'Intel Core i5-12400, 32GB ECC RAM, dual 1TB NVMe mirrors + dual 8TB ZFS mirrors for storage.',
+        name: 'Hario V60 Ceramic Dripper & Buono Kettle',
+        desc: 'The morning brew ritual. Measuring whole beans, grinding by hand with a Comandante C40, and pouring slowly in concentric circles.',
       },
       {
-        name: 'Docker & Docker Compose',
-        desc: 'Container management for homelab services: Caddy reverse proxy, Pi-hole, Vaultwarden, and backup agents.',
+        name: 'Tokoname Clay Kyusu Teapot',
+        desc: 'Unpainted natural clay teapot from Aichi, Japan. Used for brewing deep green Japanese sencha and nutty roasted hojicha in the afternoons.',
+      },
+    ],
+  },
+  {
+    title: 'Digital Tools & Software',
+    description: 'Quiet, well-crafted applications that get out of the way.',
+    items: [
+      {
+        name: 'Obsidian',
+        desc: 'Where all my personal reading notes, garden essays, and journals live as simple, future-proof Markdown files stored locally on my drive.',
       },
       {
-        name: 'Cloudflare (Workers, Pages, DNS)',
-        desc: 'Authoritative DNS management, edge caching, zero-trust tunnels, and serverless hosting.',
+        name: 'NetNewsWire',
+        desc: 'A fast, calm open-source RSS reader for Mac and iOS. No algorithmic curation—just the independent blogs and writers I follow.',
       },
       {
-        name: 'Restic & Backblaze B2',
-        desc: 'Automated, deduplicated, and client-side encrypted off-site backups triggered nightly via systemd timers.',
+        name: 'Visual Studio Code & Ghostty',
+        desc: 'Stripped of heavy popups and AI distractions, configured with clean monospace typography and generous line heights.',
+      },
+      {
+        name: 'Things 3',
+        desc: 'The only task manager that feels like a clean piece of paper rather than a stressful project management dashboard.',
       },
     ],
   },
@@ -81,16 +87,16 @@ const sections = [
 
 <BaseLayout
   title="Uses"
-  description="Hardware, developer software, editor configurations, and tools used by Mando."
+  description="Tools, books, analog pens, coffee gear, and workspace objects used by Mando."
 >
   <div class="max-w-[720px] mx-auto space-y-12">
     <!-- Header -->
-    <header class="space-y-3 pb-8 border-b border-zinc-200/80 dark:border-zinc-800/80">
-      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-zinc-950 dark:text-zinc-50">
-        Uses
+    <header class="space-y-3 pb-8 border-b border-stone-200/80 dark:border-stone-800/80">
+      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-stone-950 dark:text-stone-50">
+        Things I Use
       </h1>
-      <p class="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 font-serif leading-relaxed">
-        A living catalog of the hardware, developer tooling, terminal environment, and homelab setup I use on a daily basis.
+      <p class="text-base sm:text-lg text-stone-600 dark:text-stone-400 font-serif leading-relaxed">
+        A curated list of the physical tools, pens, notebooks, coffee rituals, and quiet software I reach for every day.
       </p>
     </header>
 
@@ -99,21 +105,21 @@ const sections = [
       {sections.map((section) => (
         <section class="space-y-5">
           <div>
-            <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+            <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-stone-900 dark:text-stone-100">
               {section.title}
             </h2>
-            <p class="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 mt-1">
+            <p class="text-xs sm:text-sm text-stone-500 dark:text-stone-400 mt-1">
               {section.description}
             </p>
           </div>
 
-          <div class="divide-y divide-zinc-200/80 dark:divide-zinc-800/80 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80 bg-white/40 dark:bg-zinc-900/20 overflow-hidden">
+          <div class="divide-y divide-stone-200/80 dark:divide-stone-800/80 rounded-xl border border-stone-200/80 dark:border-stone-800/80 bg-white/70 dark:bg-stone-900/20 overflow-hidden">
             {section.items.map((item) => (
               <div class="p-4 sm:p-5 flex flex-col gap-1">
-                <span class="text-sm font-semibold text-zinc-900 dark:text-zinc-100 font-mono">
+                <span class="text-sm font-semibold text-stone-900 dark:text-stone-100 font-mono">
                   {item.name}
                 </span>
-                <span class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed font-serif">
+                <span class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed font-serif">
                   {item.desc}
                 </span>
               </div>
