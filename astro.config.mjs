@@ -6,13 +6,15 @@ import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import { unified } from '@astrojs/markdown-remark';
 
+import sitemap from '@astrojs/sitemap';
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://mando.dev',
   vite: {
     plugins: [tailwindcss()]
   },
-  integrations: [mdx()],
+  integrations: [mdx(), sitemap()],
   markdown: {
     processor: unified({
       rehypePlugins: [

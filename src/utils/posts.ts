@@ -52,6 +52,35 @@ export async function getAllTags(): Promise<TagCount[]> {
     .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
 }
 
+export interface CategoryCount {
+  name: string;
+  count: number;
+  slug: string;
+}
+
+/**
+ * Aggregates all unique categories from published posts along with counts.
+ */
+export async function getAllCategories(): Promise<CategoryCount[]> {
+  const posts = await getPublishedPosts();
+  const catMap = new Map<string, number>();
+
+  for (const post of posts) {
+    if (post.data.category) {
+      const name = post.data.category.trim();
+      catMap.set(name, (catMap.get(name) || 0) + 1);
+    }
+  }
+
+  return Array.from(catMap.entries())
+    .map(([name, count]) => ({
+      name,
+      count,
+      slug: name.toLowerCase().replace(/\s+/g, '-'),
+    }))
+    .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
+}
+
 /**
  * Calculates related posts based on overlapping tags and category match,
  * excluding the current post.

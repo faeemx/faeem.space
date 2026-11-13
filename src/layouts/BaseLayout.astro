@@ -8,20 +8,63 @@ interface Props {
   description?: string;
   image?: string;
   articleDate?: Date;
+  updatedDate?: Date;
   type?: 'website' | 'article';
   canonicalUrl?: string;
+  tags?: string[];
 }
 
 const {
   title = 'Mando — Personal Developer Blog',
   description = 'A clean, typography-focused personal developer blog documenting systems engineering, software craftsmanship, and technology experiments.',
-  image = '/images/og-default.png',
+  image = '/favicon.svg',
   articleDate,
+  updatedDate,
   type = 'website',
   canonicalUrl = Astro.url.href,
+  tags = [],
 } = Astro.props;
 
 const siteTitle = title.includes('Mando') ? title : `${title} — Mando`;
+const absoluteImageUrl = new URL(image, Astro.site || Astro.url).href;
+
+// JSON-LD Structured Data
+const jsonLd = type === 'article' && articleDate
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'BlogPosting',
+      headline: title,
+      description: description,
+      image: absoluteImageUrl,
+      datePublished: articleDate.toISOString(),
+      dateModified: (updatedDate || articleDate).toISOString(),
+      author: {
+        '@type': 'Person',
+        name: 'Mando',
+        url: new URL('/about', Astro.site || Astro.url).href,
+      },
+      publisher: {
+        '@type': 'Person',
+        name: 'Mando',
+      },
+      mainEntityOfPage: {
+        '@type': 'WebPage',
+        '@id': canonicalUrl,
+      },
+      keywords: tags.join(', '),
+    }
+  : {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: 'Mando',
+      url: (Astro.site || Astro.url).toString(),
+      description: description,
+      author: {
+        '@type': 'Person',
+        name: 'Mando',
+        url: new URL('/about', Astro.site || Astro.url).href,
+      },
+    };
 ---
 
 <!doctype html>
@@ -47,9 +90,12 @@ const siteTitle = title.includes('Mando') ? title : `${title} — Mando`;
     <meta property="og:title" content={siteTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:site_name" content="Mando" />
-    <meta property="og:image" content={new URL(image, Astro.url).href} />
+    <meta property="og:image" content={absoluteImageUrl} />
     {articleDate && (
       <meta property="article:published_time" content={articleDate.toISOString()} />
+    )}
+    {updatedDate && (
+      <meta property="article:modified_time" content={updatedDate.toISOString()} />
     )}
 
     <!-- Twitter / X -->
@@ -57,7 +103,10 @@ const siteTitle = title.includes('Mando') ? title : `${title} — Mando`;
     <meta property="twitter:url" content={canonicalUrl} />
     <meta property="twitter:title" content={siteTitle} />
     <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={new URL(image, Astro.url).href} />
+    <meta property="twitter:image" content={absoluteImageUrl} />
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
     <!-- Preconnect to Google Fonts for Inter, Literata, and JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -69,6 +118,8 @@ const siteTitle = title.includes('Mando') ? title : `${title} — Mando`;
 
     <!-- RSS Auto-discovery -->
     <link rel="alternate" type="application/rss+xml" title="Mando RSS Feed" href="/rss.xml" />
+    <!-- Sitemap Link -->
+    <link rel="sitemap" href="/sitemap-index.xml" />
 
     <!-- Inline script to apply dark/light theme instantly without flash -->
     <script is:inline>

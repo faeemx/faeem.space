@@ -1,0 +1,96 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getPublishedPosts, getAllCategories, type BlogPost } from '../../utils/posts';
+
+export async function getStaticPaths() {
+  const posts = await getPublishedPosts();
+  const categories = await getAllCategories();
+
+  return categories.map((cat) => {
+    const matchingPosts = posts.filter(
+      (p) => p.data.category?.trim().toLowerCase() === cat.name.toLowerCase()
+    );
+
+    return {
+      params: { category: cat.slug },
+      props: {
+        categoryName: cat.name,
+        posts: matchingPosts,
+        allCategories: categories,
+      },
+    };
+  });
+}
+
+interface Props {
+  categoryName: string;
+  posts: BlogPost[];
+  allCategories: Array<{ name: string; count: number; slug: string }>;
+}
+
+const { categoryName, posts, allCategories } = Astro.props;
+---
+
+<BaseLayout
+  title={`Category: ${categoryName}`}
+  description={`Browse all articles filed under ${categoryName} by Mando.`}
+>
+  <div class="space-y-10">
+    <!-- Back to blog -->
+    <div>
+      <a
+        href="/blog"
+        class="inline-flex items-center gap-1.5 text-xs font-mono text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors"
+      >
+        <span>&larr;</span>
+        <span>All articles</span>
+      </a>
+    </div>
+
+    <!-- Page Header -->
+    <header class="space-y-3">
+      <div class="flex items-center gap-3">
+        <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-zinc-950 dark:text-zinc-50">
+          {categoryName}
+        </h1>
+        <span class="text-xs font-mono px-2 py-0.5 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">
+          {posts.length} {posts.length === 1 ? 'article' : 'articles'}
+        </span>
+      </div>
+      <p class="text-zinc-600 dark:text-zinc-400 text-sm sm:text-base">
+        Showing all published articles categorized under <strong class="text-zinc-900 dark:text-zinc-100">{categoryName}</strong>.
+      </p>
+    </header>
+
+    <!-- Categories pill bar -->
+    <div class="pt-2 pb-4 border-y border-zinc-200/80 dark:border-zinc-800/80">
+      <div class="text-xs font-mono text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-2.5">
+        Categories
+      </div>
+      <div class="flex flex-wrap gap-2">
+        {allCategories.map((c) => (
+          <a
+            href={`/category/${c.slug}`}
+            class:list={[
+              "px-3 py-1 rounded-md text-xs font-mono border transition-colors",
+              c.name === categoryName
+                ? "bg-zinc-200 text-zinc-950 border-zinc-300 dark:bg-zinc-800 dark:text-zinc-100 dark:border-zinc-700 font-medium"
+                : "bg-zinc-100/60 text-zinc-600 border-zinc-200/80 hover:text-zinc-950 dark:bg-zinc-900/40 dark:text-zinc-400 dark:border-zinc-800 dark:hover:text-zinc-200"
+            ]}
+          >
+            <span>{c.name}</span>
+            <span class="text-[11px] opacity-60 ml-1">({c.count})</span>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <!-- Posts Feed -->
+    <div class="space-y-4">
+      {posts.map((post) => (
+        <PostCard post={post} />
+      ))}
+    </div>
+  </div>
+</BaseLayout>

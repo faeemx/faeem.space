@@ -1,0 +1,240 @@
+---
+// SearchModal.astro
+---
+
+<!-- Trigger Button -->
+<button
+  type="button"
+  id="search-open-btn"
+  class="flex items-center gap-2 px-2.5 py-1.5 text-xs font-mono text-zinc-500 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800/60 rounded-md border border-zinc-200/80 dark:border-zinc-800/80 transition-colors"
+  aria-label="Search articles"
+>
+  <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+  </svg>
+  <span class="hidden sm:inline">Search</span>
+  <kbd class="hidden sm:inline-block px-1.5 py-0.5 text-[10px] bg-zinc-200/70 dark:bg-zinc-800 rounded text-zinc-600 dark:text-zinc-400">
+    ⌘K
+  </kbd>
+</button>
+
+<!-- Modal Backdrop & Dialog -->
+<div
+  id="search-dialog"
+  class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm p-4 sm:p-6 md:p-20 overflow-y-auto"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="search-modal-title"
+>
+  <div class="max-w-xl mx-auto bg-[#ffffff] dark:bg-[#12161f] border border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-2xl overflow-hidden transition-all">
+    <!-- Search Input Header -->
+    <div class="flex items-center px-4 py-3 border-b border-zinc-200 dark:border-zinc-800 gap-3">
+      <svg class="w-5 h-5 text-zinc-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+      </svg>
+      <input
+        type="text"
+        id="search-input"
+        class="w-full bg-transparent text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none"
+        placeholder="Search articles by title, description, or #tag..."
+        autocomplete="off"
+        spellcheck="false"
+      />
+      <button
+        type="button"
+        id="search-close-btn"
+        class="text-xs font-mono px-2 py-1 text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 rounded"
+        aria-label="Close search"
+      >
+        <kbd class="text-[11px]">ESC</kbd>
+      </button>
+    </div>
+
+    <!-- Search Results List -->
+    <div id="search-results-container" class="max-h-[380px] overflow-y-auto p-2 space-y-1">
+      <div id="search-empty-state" class="py-12 text-center text-xs font-mono text-zinc-500">
+        Type to search articles...
+      </div>
+    </div>
+
+    <!-- Modal Footer -->
+    <div class="px-4 py-2.5 bg-zinc-50 dark:bg-zinc-900/60 border-t border-zinc-200 dark:border-zinc-800 flex items-center justify-between text-[11px] font-mono text-zinc-500">
+      <div class="flex items-center gap-3">
+        <span><kbd>↑</kbd> <kbd>↓</kbd> Navigate</span>
+        <span><kbd>↵</kbd> Select</span>
+        <span><kbd>ESC</kbd> Close</span>
+      </div>
+      <span id="search-count-label"></span>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  function setupSearch() {
+    const openBtn = document.getElementById('search-open-btn');
+    const closeBtn = document.getElementById('search-close-btn');
+    const dialog = document.getElementById('search-dialog');
+    const input = document.getElementById('search-input');
+    const resultsContainer = document.getElementById('search-results-container');
+    const countLabel = document.getElementById('search-count-label');
+
+    if (!openBtn || !dialog || !input || !resultsContainer) return;
+
+    let searchIndex = null;
+    let selectedIndex = -1;
+
+    async function loadIndex() {
+      if (searchIndex) return searchIndex;
+      try {
+        const res = await fetch('/search.json');
+        searchIndex = await res.json();
+      } catch (e) {
+        console.error('Failed to load search index:', e);
+        searchIndex = [];
+      }
+      return searchIndex;
+    }
+
+    function openModal() {
+      dialog.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      loadIndex().then(() => {
+        input.focus();
+        if (!input.value.trim()) renderSuggestions();
+      });
+    }
+
+    function closeModal() {
+      dialog.classList.add('hidden');
+      document.body.style.overflow = '';
+      input.value = '';
+      selectedIndex = -1;
+    }
+
+    function renderSuggestions() {
+      if (!searchIndex || !searchIndex.length) return;
+      resultsContainer.innerHTML = '';
+      
+      const label = document.createElement('div');
+      label.className = 'px-3 py-2 text-[11px] font-mono text-zinc-500 dark:text-zinc-400 uppercase tracking-wider';
+      label.textContent = 'Recent Articles';
+      resultsContainer.appendChild(label);
+
+      searchIndex.slice(0, 4).forEach((item, idx) => {
+        const el = createResultElement(item, idx);
+        resultsContainer.appendChild(el);
+      });
+      if (countLabel) countLabel.textContent = `${searchIndex.length} articles`;
+    }
+
+    function createResultElement(item, index) {
+      const a = document.createElement('a');
+      a.href = item.url;
+      a.className = 'search-result-item block px-3 py-2.5 rounded-lg text-left transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-800/80';
+      a.setAttribute('data-index', index);
+
+      a.innerHTML = `
+        <div class="flex items-center justify-between gap-2 mb-1">
+          <span class="text-sm font-semibold text-zinc-900 dark:text-zinc-100 line-clamp-1">${item.title}</span>
+          <span class="text-[11px] font-mono text-zinc-400 shrink-0">${item.pubDate}</span>
+        </div>
+        <p class="text-xs text-zinc-500 dark:text-zinc-400 line-clamp-1 mb-1.5">${item.description}</p>
+        <div class="flex items-center gap-1.5 text-[10px] font-mono text-zinc-400">
+          <span class="px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">${item.category}</span>
+          ${item.tags.map(t => `<span class="opacity-75">#${t}</span>`).slice(0, 3).join(' ')}
+        </div>
+      `;
+      return a;
+    }
+
+    function performSearch() {
+      const query = input.value.trim().toLowerCase();
+      if (!query) {
+        renderSuggestions();
+        return;
+      }
+
+      if (!searchIndex) return;
+
+      const results = searchIndex.filter((post) => {
+        const titleMatch = post.title.toLowerCase().includes(query);
+        const descMatch = post.description.toLowerCase().includes(query);
+        const tagMatch = post.tags.some((t) => t.toLowerCase().includes(query));
+        const catMatch = post.category.toLowerCase().includes(query);
+        return titleMatch || descMatch || tagMatch || catMatch;
+      });
+
+      resultsContainer.innerHTML = '';
+      selectedIndex = -1;
+
+      if (!results.length) {
+        resultsContainer.innerHTML = `
+          <div class="py-8 text-center text-xs font-mono text-zinc-500">
+            No articles matching "<span class="text-zinc-700 dark:text-zinc-300">${input.value}</span>"
+          </div>
+        `;
+        if (countLabel) countLabel.textContent = '0 results';
+        return;
+      }
+
+      results.forEach((item, idx) => {
+        const el = createResultElement(item, idx);
+        resultsContainer.appendChild(el);
+      });
+
+      if (countLabel) countLabel.textContent = `${results.length} found`;
+    }
+
+    openBtn.addEventListener('click', openModal);
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+    dialog.addEventListener('click', (e) => {
+      if (e.target === dialog) closeModal();
+    });
+
+    input.addEventListener('input', performSearch);
+
+    window.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        if (dialog.classList.contains('hidden')) {
+          openModal();
+        } else {
+          closeModal();
+        }
+      } else if (e.key === 'Escape' && !dialog.classList.contains('hidden')) {
+        closeModal();
+      } else if (!dialog.classList.contains('hidden')) {
+        const items = resultsContainer.querySelectorAll('.search-result-item');
+        if (!items.length) return;
+
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          selectedIndex = (selectedIndex + 1) % items.length;
+          updateHighlight(items);
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          selectedIndex = (selectedIndex - 1 + items.length) % items.length;
+          updateHighlight(items);
+        } else if (e.key === 'Enter' && selectedIndex >= 0 && items[selectedIndex]) {
+          e.preventDefault();
+          items[selectedIndex].click();
+        }
+      }
+    });
+
+    function updateHighlight(items) {
+      items.forEach((item, idx) => {
+        if (idx === selectedIndex) {
+          item.classList.add('bg-zinc-100', 'dark:bg-zinc-800');
+          item.scrollIntoView({ block: 'nearest' });
+        } else {
+          item.classList.remove('bg-zinc-100', 'dark:bg-zinc-800');
+        }
+      });
+    }
+  }
+
+  setupSearch();
+  document.addEventListener('astro:after-swap', setupSearch);
+</script>

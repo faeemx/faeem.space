@@ -1,5 +1,6 @@
 ---
 import ThemeToggle from './ThemeToggle.astro';
+import SearchModal from './SearchModal.astro';
 
 const currentPath = Astro.url.pathname;
 
@@ -12,14 +13,14 @@ const navItems = [
 
 function isActive(href: string): boolean {
   if (href === '/blog') {
-    return currentPath === '/blog' || currentPath.startsWith('/blog/') || currentPath.startsWith('/tags/');
+    return currentPath === '/blog' || currentPath.startsWith('/blog/') || currentPath.startsWith('/tags/') || currentPath.startsWith('/category/');
   }
   return currentPath === href || currentPath.startsWith(`${href}/`);
 }
 ---
 
 <header class="sticky top-0 z-40 w-full border-b border-zinc-200/80 dark:border-zinc-800/70 bg-[#fbfbfd]/80 dark:bg-[#0b0d11]/80 backdrop-blur-md transition-colors">
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-2">
     <!-- Brand -->
     <a href="/" class="group flex items-center gap-2 font-mono text-base font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">
       <span class="w-2 h-2 rounded-full bg-emerald-500 inline-block group-hover:scale-125 transition-transform"></span>
@@ -42,11 +43,13 @@ function isActive(href: string): boolean {
         </a>
       ))}
       <div class="h-4 w-px bg-zinc-200 dark:bg-zinc-800 mx-1"></div>
+      <SearchModal />
       <ThemeToggle />
     </nav>
 
     <!-- Mobile Nav Controls -->
     <div class="flex items-center gap-1 sm:hidden">
+      <SearchModal />
       <ThemeToggle />
       <button
         type="button"

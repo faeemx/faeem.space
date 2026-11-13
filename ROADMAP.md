@@ -6,8 +6,8 @@ Mando is a clean, fast, minimal personal developer blog built with Astro, TypeSc
 
 - **Phase 1: Foundation** — ✅ Completed
 - **Phase 2: Reading Experience** — ✅ Completed
-- **Phase 3: Discovery and SEO** — 🟡 Up Next
-- **Phase 4: Cloudflare Deployment** — ⚪ Planned
+- **Phase 3: Discovery and SEO** — ✅ Completed
+- **Phase 4: Cloudflare Deployment** — 🟡 Up Next
 - **Phase 5: Optional Enhancements** — ⚪ Future
 
 ---
@@ -48,25 +48,25 @@ Mando is a clean, fast, minimal personal developer blog built with Astro, TypeSc
 
 ---
 
-## Phase 3 — Discovery and SEO (Next Scope)
+## Phase 3 — Discovery and SEO (Completed)
 
-- [x] Basic RSS feed generation (`/rss.xml`)
-- [x] `robots.txt` configuration
-- [ ] Sitemap generation (`@astrojs/sitemap`)
-- [ ] Client-side / static fuzzy search for articles
-- [ ] Dedicated category filtering views
-- [ ] Dynamic Open Graph preview cards
-- [ ] Structured JSON-LD metadata for search engines
+- [x] Validated RSS 2.0 feed generation (`/rss.xml`)
+- [x] Search engine crawler directives (`public/robots.txt`)
+- [x] Automated XML sitemap and index generation (`@astrojs/sitemap`)
+- [x] Lightning-fast client-side fuzzy search dialog (`Cmd+K` / `Ctrl+K` shortcut, autocomplete, keyboard navigation)
+- [x] Static search index generator (`/search.json`)
+- [x] Dynamic category filtering routes (`/category/[category]`) and category pill tabs on `/blog`
+- [x] Structured JSON-LD metadata for search engines (`BlogPosting`, `WebSite`, `Person`)
+- [x] Open Graph & Twitter Summary Cards with canonical URLs and fallbacks
 
 ---
 
-## Phase 4 — Cloudflare Deployment
+## Phase 4 — Cloudflare Deployment (Next Scope)
 
-- [ ] Cloudflare Workers / Pages configuration (`wrangler.toml` or `@astrojs/cloudflare` if needed)
-- [ ] GitHub Actions workflow for automated deployment on push
-- [ ] Custom domain DNS configuration
+- [ ] Cloudflare deployment configuration (`wrangler.toml` for Cloudflare Workers / Pages)
+- [ ] GitHub Actions CI/CD workflow for automated deployment on push to `main`
 - [ ] Production build verification
-- [ ] Lighthouse / Web Vitals performance benchmarking
+- [ ] Asset caching and headers configuration (`_headers` / `_routes.json`)
 
 ---
 
