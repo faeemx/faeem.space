@@ -1,0 +1,91 @@
+---
+// CodeBlockEnhancer.astro
+---
+
+<script is:inline>
+  function setupCodeBlockEnhancers() {
+    const preBlocks = document.querySelectorAll('.article-prose pre');
+
+    preBlocks.forEach((pre) => {
+      // Avoid duplicate wrapper/button if already enhanced
+      if (pre.parentElement && pre.parentElement.classList.contains('code-block-wrapper')) {
+        return;
+      }
+
+      // Detect language from class or data-language attribute
+      const code = pre.querySelector('code');
+      let lang = pre.getAttribute('data-language') || '';
+      if (!lang && code) {
+        const match = code.className.match(/language-([a-z0-9_-]+)/i);
+        if (match) lang = match[1];
+      }
+      if (!lang && pre.className) {
+        const match = pre.className.match(/language-([a-z0-9_-]+)/i);
+        if (match) lang = match[1];
+      }
+
+      // Create wrapper
+      const wrapper = document.createElement('div');
+      wrapper.className = 'code-block-wrapper relative my-6 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80 overflow-hidden bg-[#101318] dark:bg-[#101318]';
+      
+      // Create top header bar
+      const header = document.createElement('div');
+      header.className = 'flex items-center justify-between px-4 py-2 border-b border-zinc-800/80 bg-[#141820] text-zinc-400 text-xs font-mono select-none';
+
+      const langSpan = document.createElement('span');
+      langSpan.className = 'text-[11px] font-semibold uppercase tracking-wider text-zinc-400';
+      langSpan.textContent = lang || 'code';
+
+      // Copy button
+      const copyBtn = document.createElement('button');
+      copyBtn.type = 'button';
+      copyBtn.className = 'flex items-center gap-1.5 px-2 py-1 rounded text-[11px] text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 transition-colors focus:outline-none';
+      copyBtn.setAttribute('aria-label', 'Copy code to clipboard');
+      copyBtn.innerHTML = `
+        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+        </svg>
+        <span>Copy</span>
+      `;
+
+      copyBtn.addEventListener('click', async () => {
+        const codeText = (code ? code.innerText : pre.innerText).trim();
+        try {
+          await navigator.clipboard.writeText(codeText);
+          copyBtn.innerHTML = `
+            <svg class="w-3.5 h-3.5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <span class="text-emerald-400">Copied!</span>
+          `;
+          setTimeout(() => {
+            copyBtn.innerHTML = `
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+              </svg>
+              <span>Copy</span>
+            `;
+          }, 2000);
+        } catch (err) {
+          console.error('Failed to copy: ', err);
+        }
+      });
+
+      header.appendChild(langSpan);
+      header.appendChild(copyBtn);
+
+      // Re-parent pre
+      pre.parentNode?.insertBefore(wrapper, pre);
+      wrapper.appendChild(header);
+      wrapper.appendChild(pre);
+
+      // Reset pre margins so wrapper controls outer spacing
+      pre.style.margin = '0';
+      pre.style.border = 'none';
+      pre.style.borderRadius = '0';
+    });
+  }
+
+  setupCodeBlockEnhancers();
+  document.addEventListener('astro:after-swap', setupCodeBlockEnhancers);
+</script>

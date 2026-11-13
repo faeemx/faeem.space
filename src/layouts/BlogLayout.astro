@@ -2,6 +2,9 @@
 import BaseLayout from './BaseLayout.astro';
 import TagBadge from '../components/TagBadge.astro';
 import TableOfContents from '../components/TableOfContents.astro';
+import ReadingProgress from '../components/ReadingProgress.astro';
+import CodeBlockEnhancer from '../components/CodeBlockEnhancer.astro';
+import RelatedPosts from '../components/RelatedPosts.astro';
 import { formatDate, type BlogPost } from '../utils/posts';
 import { getReadingTime } from '../utils/readingTime';
 
@@ -16,9 +19,10 @@ interface Props {
   headings?: Heading[];
   prevPost?: BlogPost;
   nextPost?: BlogPost;
+  relatedPosts?: BlogPost[];
 }
 
-const { post, headings = [], prevPost, nextPost } = Astro.props;
+const { post, headings = [], prevPost, nextPost, relatedPosts = [] } = Astro.props;
 const readingTime = getReadingTime(post.body || '');
 ---
 
@@ -28,6 +32,9 @@ const readingTime = getReadingTime(post.body || '');
   articleDate={post.data.pubDate}
   type="article"
 >
+  <!-- Reading Progress Bar -->
+  <ReadingProgress />
+
   <article class="max-w-[720px] mx-auto">
     <!-- Back button -->
     <div class="mb-8">
@@ -109,6 +116,11 @@ const readingTime = getReadingTime(post.body || '');
       <slot />
     </div>
 
+    <!-- Related Articles -->
+    {relatedPosts.length > 0 && (
+      <RelatedPosts posts={relatedPosts} />
+    )}
+
     <!-- Article Footer / Navigation -->
     <footer class="mt-16 pt-8 border-t border-zinc-200/80 dark:border-zinc-800/80">
       <!-- Prev / Next Navigation -->
@@ -156,4 +168,7 @@ const readingTime = getReadingTime(post.body || '');
       </div>
     </footer>
   </article>
+
+  <!-- Client-side Code Block copy buttons & language tags -->
+  <CodeBlockEnhancer />
 </BaseLayout>

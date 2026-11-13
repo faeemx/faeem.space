@@ -5,8 +5,8 @@ Mando is a clean, fast, minimal personal developer blog built with Astro, TypeSc
 ## Status Summary
 
 - **Phase 1: Foundation** — ✅ Completed
-- **Phase 2: Reading Experience** — 🟡 Up Next
-- **Phase 3: Discovery and SEO** — ⚪ Planned
+- **Phase 2: Reading Experience** — ✅ Completed
+- **Phase 3: Discovery and SEO** — 🟡 Up Next
 - **Phase 4: Cloudflare Deployment** — ⚪ Planned
 - **Phase 5: Optional Enhancements** — ⚪ Future
 
@@ -35,25 +35,25 @@ Mando is a clean, fast, minimal personal developer blog built with Astro, TypeSc
 
 ---
 
-## Phase 2 — Reading Experience (Next Scope)
+## Phase 2 — Reading Experience (Completed)
 
-- [x] Table of contents for longer articles (Initial implementation complete in Phase 1)
-- [x] Reading time calculation (Initial implementation complete in Phase 1)
-- [x] Previous / Next article navigation links (Initial implementation complete in Phase 1)
-- [ ] Reading progress indicator bar on scroll
-- [ ] Code block copy button and language pill
-- [ ] Related articles recommendation engine
-- [ ] Auto-linked heading anchors (`rehype-autolink-headings`)
-- [ ] Refined responsive image handling and captions
+- [x] Table of contents for longer articles with active section highlighting on scroll
+- [x] Reading time calculation based on clean word count
+- [x] Reading progress indicator fixed bar tracking article scroll depth
+- [x] Code block enhancements: one-click copy button with clipboard API feedback and language badge
+- [x] Related articles recommendation engine based on tag overlap and category matching
+- [x] Previous / Next article chronologically ordered navigation links
+- [x] Heading anchor links with hover visibility and deep-linking (`rehype-slug` & `rehype-autolink-headings`)
+- [x] Editorial typography refinements with Literata serif, Inter headings, and JetBrains Mono code
 
 ---
 
-## Phase 3 — Discovery and SEO
+## Phase 3 — Discovery and SEO (Next Scope)
 
-- [x] Basic RSS feed generation (`/rss.xml`) (Implemented in Phase 1)
-- [x] `robots.txt` configuration (Implemented in Phase 1)
+- [x] Basic RSS feed generation (`/rss.xml`)
+- [x] `robots.txt` configuration
 - [ ] Sitemap generation (`@astrojs/sitemap`)
-- [ ] Fast client-side / static search (Pagefind or Fuse.js)
+- [ ] Client-side / static fuzzy search for articles
 - [ ] Dedicated category filtering views
 - [ ] Dynamic Open Graph preview cards
 - [ ] Structured JSON-LD metadata for search engines

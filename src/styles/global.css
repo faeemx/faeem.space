@@ -48,6 +48,7 @@ html.light .article-prose {
   letter-spacing: -0.015em;
   color: #f3f4f6;
   scroll-margin-top: 5rem;
+  position: relative;
 }
 
 html.light .article-prose h1,
@@ -180,6 +181,28 @@ html.light .article-prose pre {
   background-color: #f8fafc !important;
 }
 
+/* Heading anchor links */
+.article-prose .heading-anchor {
+  opacity: 0;
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: 0.8em;
+  color: #71717a;
+  margin-left: 0.35rem;
+  transition: opacity 0.15s ease, color 0.15s ease;
+  user-select: none;
+}
+
+.article-prose h2:hover .heading-anchor,
+.article-prose h3:hover .heading-anchor,
+.article-prose h4:hover .heading-anchor {
+  opacity: 1;
+}
+
+.article-prose .heading-anchor:hover {
+  color: #3b82f6;
+}
+
 .article-prose hr {
   border: 0;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -200,4 +223,32 @@ html.light .article-prose hr {
 
 html.light .article-prose img {
   border-color: rgba(0, 0, 0, 0.08);
+}
+
+.article-prose figure {
+  margin: 2rem 0;
+}
+
+.article-prose figcaption {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #71717a;
+  margin-top: 0.5rem;
+  font-family: var(--font-sans);
+}
+
+/* Custom subtle scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(150, 150, 150, 0.2);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(150, 150, 150, 0.35);
 }

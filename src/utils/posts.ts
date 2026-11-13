@@ -51,3 +51,32 @@ export async function getAllTags(): Promise<TagCount[]> {
     .map(([name, count]) => ({ name, count }))
     .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
 }
+
+/**
+ * Calculates related posts based on overlapping tags and category match,
+ * excluding the current post.
+ */
+export async function getRelatedPosts(currentPost: BlogPost, limit = 2): Promise<BlogPost[]> {
+  const allPosts = await getPublishedPosts();
+  const currentTags = new Set((currentPost.data.tags || []).map((t) => t.toLowerCase()));
+
+  const scored = allPosts
+    .filter((post) => post.id !== currentPost.id)
+    .map((post) => {
+      let score = 0;
+      // Category match bonus
+      if (post.data.category && post.data.category === currentPost.data.category) {
+        score += 2;
+      }
+      // Overlapping tags bonus
+      for (const tag of post.data.tags || []) {
+        if (currentTags.has(tag.toLowerCase())) {
+          score += 3;
+        }
+      }
+      return { post, score };
+    })
+    .sort((a, b) => b.score - a.score || b.post.data.pubDate.getTime() - a.post.data.pubDate.getTime());
+
+  return scored.slice(0, limit).map((s) => s.post);
+}

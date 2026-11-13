@@ -1,5 +1,5 @@
 ---
-import { getPublishedPosts, type BlogPost } from '../../utils/posts';
+import { getPublishedPosts, getRelatedPosts, type BlogPost } from '../../utils/posts';
 import BlogLayout from '../../layouts/BlogLayout.astro';
 import { render } from 'astro:content';
 
@@ -27,6 +27,7 @@ interface Props {
 
 const { post, prevPost, nextPost } = Astro.props;
 const { Content, headings } = await render(post);
+const relatedPosts = await getRelatedPosts(post, 2);
 ---
 
 <BlogLayout
@@ -34,6 +35,7 @@ const { Content, headings } = await render(post);
   headings={headings}
   prevPost={prevPost}
   nextPost={nextPost}
+  relatedPosts={relatedPosts}
 >
   <Content />
 </BlogLayout>
